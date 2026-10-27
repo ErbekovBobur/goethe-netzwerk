@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Netzwerk neu B1 · Kapitel 11 interaktiv</title>
+<style>
+:root{--bg:#f4f8fa;--card:#fff;--tx:#17313b;--mu:#5b7580;--ac:#0b7a96;--ok:#1e8a4c;--bad:#c0392b;--bd:#d3e0e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10191d;--card:#18262c;--tx:#e6f0f3;--mu:#93aab3;--ac:#4fc3df;--ok:#4cc783;--bad:#ff7b6b;--bd:#2c3f47;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#10191d;--card:#18262c;--tx:#e6f0f3;--mu:#93aab3;--ac:#4fc3df;--ok:#4cc783;--bad:#ff7b6b;--bd:#2c3f47;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--ac);color:#fff;padding:10px 16px;z-index:5}
+header h1{margin:0;font-size:1.05rem}header small{opacity:.9}
+.bar{height:6px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:6px}.bar i{display:block;height:100%;background:#fff;border-radius:3px;width:0;transition:width .3s}
+nav{display:flex;gap:8px;max-width:760px;margin:12px auto 0;padding:0 12px}
+nav button{flex:1;padding:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:8px;font:inherit;cursor:pointer}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:760px;margin:0 auto;padding:12px}
+.ex{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.ex.done{border-color:var(--ok)}
+.ex h2{margin:0;font-size:.8rem;color:var(--ac);letter-spacing:.04em;text-transform:uppercase}
+.ex p.i{margin:4px 0 8px;font-weight:600}.bank{background:var(--bg);border-radius:8px;padding:6px 10px;font-size:.92rem;margin:0 0 8px;color:var(--mu)}
+ol{padding-left:0;list-style:none;margin:0}li{padding:5px 0;border-top:1px dashed var(--bd)}
+select,input{font:inherit;color:var(--tx);background:var(--bg);border:1.5px solid var(--bd);border-radius:6px;padding:2px 6px;max-width:100%}
+input{min-width:5em}.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 14%,var(--bg))}.bad{border-color:var(--bad)!important;background:color-mix(in srgb,var(--bad) 14%,var(--bg))}
+.act{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.act button,.tts button{font:inherit;padding:6px 12px;border-radius:8px;border:1px solid var(--ac);background:var(--ac);color:#fff;cursor:pointer}
+.act button.g,.tts button{background:transparent;color:var(--ac)}
+.sc{font-weight:700}.tts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+details{margin-top:8px;color:var(--mu);font-size:.9rem}
+</style></head><body>
+<header><h1>Netzwerk neu B1 · Kapitel 11 „Stadt, Land, Fluss“</h1><small id="pt">0 / 0 Aufgaben gelöst</small><div class="bar"><i id="pb"></i></div></header>
+<nav><button data-f="" class="on">Alle</button><button data-f="KB">Kursbuch</button><button data-f="ÜB">Übungsbuch</button></nav>
+<main id="m"></main>
+<script>
+const R='{*richtig|falsch}',F='{richtig|*falsch}';
+const T7=['Und hier noch eine Information zum Filmfest im Stadtmuseum. Der Film „Leben in der Stadt“ läuft heute nicht wie im Programm angekündigt um 17:00 Uhr, sondern bereits um 16:00 Uhr. Um 18:00 Uhr beginnt dann bereits die Fragerunde mit dem Regisseur. Das Filmprogramm für den Abend beginnt dann um 20:00 Uhr. Tickets gibt es direkt an der Kasse des Stadtmuseums.',
+'Am besten fahren Sie von hier mit der Straßenbahn zum Hauptbahnhof. Dort gehen Sie dann nach rechts in die Frauenstraße. Sie kommen dann an eine große Kreuzung. Da können Sie das Rathaus schon sehen. Gehen Sie über die Straße in die Müllerstraße und dann in die Karlsstraße. Direkt dort ist das Rathaus. Es gibt viele Parkplätze in der Müllerstraße, wenn Sie lieber mit dem Auto fahren wollen.',
+'Vielen Dank für Ihren Anruf. Sie rufen außerhalb unserer Öffnungs- und Sprechzeiten an. Das Bürgerbüro ist von Montag bis Freitag von 8 bis 14 Uhr geöffnet. Am Dienstag und Donnerstag sind wir auch in der Zeit von 15 bis 17 Uhr für Sie da. Bitte beachten Sie, dass telefonische Anfragen nur zu den regulären Öffnungszeiten beantwortet werden können. Vielen Dank und auf Wiederhören.',
+'Intercity 1651 nach Leipzig, Abfahrt 13 Uhr 17. Der Intercity 1651 nach Leipzig fährt heute aufgrund seiner Verspätung von 30 Minuten nicht planmäßig von Gleis 3, sondern von Gleis 10. Reisende nach Leipzig: Bitte begeben Sie sich zu Gleis 10. Einfahrt auf Gleis 3 hat der Intercityexpress 627 nach München.',
+'Wir sind umgezogen. Ab sofort finden Sie MikaModen nicht mehr am Schillerplatz, sondern in der Blumenstraße 3, direkt in der Stadtmitte. Kommen Sie noch heute und feiern Sie mit uns die große Eröffnungsfeier mit zahlreichen Angeboten! Für jeden Kunden gibt es auch ein kleines Willkommensgeschenk. MikaModen – Ihr Spezialist für Mode!'];
+const T12=['Hallo Kamal, hier ist Annabell. Ich rufe an wegen Samstag. Wir hatten uns doch zu dem Foto-Wochenendkurs in Zürich angemeldet. Aber gerade hat mich jemand angerufen und gesagt, dass der Kurs ausfällt, weil der Kursleiter krank geworden ist. Jetzt wollte ich mal fragen, was wir denn sonst machen könnten. Zu Hause bleiben will ich nicht. Sollen wir dann in eine Foto-Ausstellung gehen? Dazu hätte ich eigentlich am meisten Lust. Oder wir suchen uns einen anderen Kurs? Schau doch nach, was es gibt und was dich interessiert. Und dann rufen wir uns zusammen. Bis dann.',
+'Das Wochenende steht vor der Tür und Sie haben noch nichts vor? Dann auf nach Köln-Nippes. Da findet an diesem Wochenende wie jedes Jahr im Mai das traditionelle Straßenfest statt. Genießen Sie bei einem gemütlichen Spaziergang durchs Viertel dieses wunderbare Bürgerfest. Geboten werden Live-Musik und zahlreiche Attraktionen für Kinder. Auch für das leibliche Wohl ist mit internationalen Spezialitäten gesorgt. Aufgrund des hohen Besucherandrangs kommen Sie bitte nicht mit dem Auto, sondern am besten mit dem Bus. Beginn ist Freitag um 16 Uhr, Ende Sonntag 20 Uhr. Viel Spaß!',
+'Und hier noch die aktuellen Wetteraussichten. Zum Wochenstart gelangt spürbar kältere Luft zu uns. Vor allem die Nächte werden sehr kalt, bei Temperaturen bis zu minus 10 Grad. Tagsüber lässt sich die Sonne nur im Süden sehen, Höchsttemperaturen bis 3 Grad. Im Norden bleibt der Himmel den ganzen Tag bewölkt, im Westen ist mit starkem Wind zu rechnen. Ab Wochenmitte wird es deutlich milder, die Temperaturen steigen im ganzen Land wieder auf 10 bis 12 Grad plus. Ab Freitag ist vermehrt mit Regen zu rechnen.',
+'Achtung Autofahrer. Auf der A3 Köln Richtung Oberhausen zwischen Kreuz Ratingen-Ost und Kreuz Breitscheid zwei Kilometer Stau wegen Unfall. Dort ist der rechte Fahrstreifen gesperrt. Wegen einer Großbaustelle ist mit Behinderungen auch auf der Autobahn A1 Anschlussstelle Lövenich zu rechnen. Auch in Köln kommt es aufgrund des starken Berufsverkehrs in der Stadtmitte zu Behinderungen. Achtung Autofahrer in Düsseldorf. Dort sind wegen einer Veranstaltung im Zentrum mehrere Straßen gesperrt.',
+'Flug LH 309 nach Genf. Leider verzögert sich der Flug nach Genf. Momentan rechnen wir mit einer Verspätung von mindestens 60 Minuten. Grund dafür ist der anhaltende Sturm über der Westschweiz. Passagiere, die von Genf aus Anschlussflüge haben, melden sich bitte umgehend an Gate 5. Flug LH 742 von Zürich nach Mailand. Dieser Flug muss wegen der starken Schneefälle ausfallen. Passagiere nach Mailand. Bitte kommen Sie für weitere Informationen zu Gate 3.'];
+const E=[
+['KB 4b · S. 54','Lesen Sie die Kommentare im Forum (Kursbuch S. 54). Zu wem passt welcher Satz?',[
+'1. … mag den Lärm in der Stadt nicht und fährt oft in die Natur. {HanSolo|*Bine|Satti|MoMa}',
+'2. … gefallen die Menschen und Veranstaltungen in der Stadt. {*HanSolo|Bine|Satti|MoMa}',
+'3. … glaubt, dass man nur in der Stadt wirklich frei leben kann. {HanSolo|Bine|Satti|*MoMa}',
+'4. … findet das Leben in der Stadt zu teuer. {HanSolo|Bine|*Satti|MoMa}']],
+['KB 6c · S. 55','Lesen Sie den Magazinbericht „Morgens um fünf“ (Kursbuch S. 55). Richtig oder falsch?',[
+'1. Ferdy hatte heute im Nachtdienst nicht mehr Arbeit als üblich. '+R,
+'2. In der Bäckerei arbeiten seit 2 Uhr nachts fünf Personen. '+F,
+'3. Die Fahrerin lädt das frische Brot allein ins Auto. '+F,
+'4. Im Bauhof der Stadt wird die ganze Nacht gearbeitet. '+F,
+'5. Der Obdachlose kann für ein paar Stunden im Bauhof schlafen. '+R]],
+['KB 6d · S. 55','Adjektive als Nomen: Ergänzen Sie die Endungen.',[
+'1. Nick, ein Bekannt[er] von mir, ist Angestellt[er] bei der Stadt.',
+'2. Er ist Sozialarbeiter und betreut Jugendlich[e].',
+'3. Gestern habe ich mit einer Verwandt[en] gesprochen.',
+'4. Sie arbeitet auch mit Jugendlich[en].']],
+['KB 9a · S. 56','Hören Sie die vier Personen (Track 2.37). Wer sagt was?',[
+'1. Dort, wo ich wohne, arbeitet man im Durchschnitt länger als in den anderen Städten. {München|Hamburg|Berlin|*Zürich}',
+'2. Die Stadt tut auch etwas für ärmere Menschen, was ich sehr wichtig finde. {München|*Hamburg|Berlin|Zürich}',
+'3. Ich lebe gerne in einer Stadt, wo der Arbeitstag nicht so früh beginnt. {München|Hamburg|*Berlin|Zürich}',
+'4. Das, was eine Stadt im Ranking attraktiv macht, kann für die Menschen auch Nachteile bringen. {*München|Hamburg|Berlin|Zürich}',
+'5. Das Wetter ist nichts, was im Ranking gewertet wird. {München|*Hamburg|Berlin|Zürich}']],
+['KB 13b · S. 59','Welche Formulierungen passen zu wem? A = Brief an einen guten Freund, B = Brief an einen Geschäftspartner (Sie).',[
+'1. bald kommen Sie zu uns nach … {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|*B Einleitung|B Schluss|B Gruß}',
+'2. Bis bald {A Anrede|A Einleitung|A Schluss|*A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'3. Gerne zeigen meine Kollegen und ich Ihnen einige Sehenswürdigkeiten. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|*B Schluss|B Gruß}',
+'4. Hallo …, {*A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'5. Hoffentlich gefallen dir die Vorschläge. {A Anrede|A Einleitung|*A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'6. Viele Grüße {A Anrede|A Einleitung|A Schluss|*A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'7. Hoffentlich haben Sie Lust bekommen, die Stadt kennenzulernen. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|*B Schluss|B Gruß}',
+'8. Sehr geehrter Herr …, {A Anrede|A Einleitung|A Schluss|A Gruß|*B Anrede|B Einleitung|B Schluss|B Gruß}',
+'9. ich freue mich sehr, dass du mich bald besuchen kommst. {A Anrede|*A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'11. Meine Kollegen und ich freuen uns schon darauf, Sie kennenzulernen. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|*B Einleitung|B Schluss|B Gruß}',
+'12. Mit freundlichen Grüßen {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|*B Gruß}',
+'13. Ich freue mich schon darauf, dir „meine Stadt“ zu zeigen. {A Anrede|*A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'14. Ich freue mich / Wir freuen uns, Sie bald hier zu begrüßen. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|*B Schluss|B Gruß}']],
+['ÜB 1 · S. 126','Ergänzen Sie das passende Wort aus dem Kasten.',[
+'1. In unserer Stadt sind viele verschiedene … unterwegs: Autos, Busse, Fahrräder, U-Bahnen. [Fahrzeuge]',
+'2. Hier ist es viel zu laut. Bei diesem … kann ich mich nicht entspannen. [Lärm]',
+'3. Ich mag die … Dort gibt es viele Geschäfte und keine Autos. [Fußgängerzone]',
+'4. Die Luft ist schlecht, weil es so viel … gibt. [Verkehr]',
+'5. Mit welcher … darf man in der Stadt fahren? 50 km/h? [Geschwindigkeit]',
+'6. Die Viertel einer Stadt sind sehr verschieden. Jeder … sieht anders aus. [Stadtteil]',
+'7. Alle Geschäfte waren geschlossen. Ich konnte mir nur die … ansehen. [Schaufenster]',
+'8. Diese Straße ist schmutzig! Wer macht den … weg? [Dreck]',
+'9. Ich wohne im 12. Stock. Die … ist super. [Aussicht]',
+'10. Frau Dinkel von nebenan ist sehr hilfsbereit. Sie ist eine tolle … [Nachbarin/Nachbarn]',
+'11. So schön, direkt am Park! Die … der Wohnung ist echt toll. [Lage]',
+'12. Mein Arbeitsplatz ist mitten in der Stadt. In unserem … gibt es 1.000 Mitarbeiter. [Unternehmen]'],
+'Aussicht | Dreck | Fahrzeuge | Fußgängerzone | Geschwindigkeit | Lage | Lärm | Nachbarn | Schaufenster | Stadtteil | Unternehmen | Verkehr'],
+['ÜB 2a · S. 126','Was passt zusammen? Ordnen Sie zu.',[
+'1. alle Ecken der Stadt {finden|*kennen|machen|renovieren|suchen|ziehen}',
+'2. alte Häuser {finden|kennen|machen|*renovieren|suchen|ziehen}',
+'3. dringend eine neue Wohnung {finden|kennen|machen|renovieren|*suchen|ziehen}',
+'4. endlich einen Parkplatz {*finden|kennen|machen|renovieren|suchen|ziehen}',
+'5. mit dem Motorrad Touren {finden|kennen|*machen|renovieren|suchen|ziehen}',
+'6. durch ein paar Kneipen {finden|kennen|machen|renovieren|suchen|*ziehen}']],
+['ÜB 3 · S. 127','Sie sind im Rathaus. In welches Zimmer gehen Sie? 110 Gesundheit/Impfungen · 111 Geburten, Heirat, Namensänderung · 112 An-/Ummeldung, Ausweise · 113 Schulen, Kitas, Elterngeld · 114 Einbürgerung, Aufenthalt · 201 Büchereien · 202 Baugenehmigung, Hundesteuer · 203 Kfz, Parkausweise · 204 Fundbüro, Parkstrafen',[
+'1. Sie haben gestern Ihre Jacke an der Bushaltestelle vergessen. {a Zimmer 201|*b Zimmer 204|c anderes Zimmer}',
+'2. Sie möchten wieder arbeiten und brauchen eine Betreuung für Ihr Kind. {*a Zimmer 113|b Zimmer 114|c anderes Zimmer}',
+'3. Sie haben geheiratet und wollen den Nachnamen Ihrer Frau annehmen. {*a Zimmer 111|b Zimmer 112|c anderes Zimmer}',
+'4. Sie sind wegen Ihrer neuen Stelle umgezogen und haben eine neue Adresse. {a Zimmer 110|b Zimmer 114|*c anderes Zimmer}',
+'5. Sie haben aus dem Tierheim einen Hund geholt und möchten ihn anmelden. {a Zimmer 112|*b Zimmer 202|c anderes Zimmer}']],
+['ÜB 4a · S. 128','Artikelwörter als Pronomen. Was ist richtig? (Simons Forumsbeitrag)',[
+'Seid ihr Stadtmenschen? Ich bin (1) {keine|*keiner}. Ich fühle mich auf dem Land wohler. Jetzt habe ich endlich (2) {eins|*einen}. Ich habe ein Haus gekauft. Es ist sehr klein, aber es ist (3) {*meins|meine}! Hier auf dem Land braucht man eigentlich ein Auto. Aber ich habe noch (4) {keiner|*keins}. Freunde fragen mich, ob es in dem Dorf auch Geschäfte gibt. Ja, zum Glück gibt es (5) {*welche|welchen}. Neben mir wohnt (6) {einer|*eine}, die drei Hunde hat. Es gibt da (7) {einer|*eins} gleich in der Nähe.']],
+['ÜB 4c · S. 128','Was passt wo? Ergänzen Sie.',[
+'1. Wo sind die anderen Studenten? Warum ist noch [keiner] da? – Na ja, wir sind zu früh.',
+'2. Morgen kaufe ich einen neuen Computer. – Was? Du hast doch erst [einen] gekauft.',
+'3. Wo finde ich weiße T-Shirts? – Da hinten auf dem Tisch liegen [welche].',
+'4. Jetzt brauche ich nur noch einen Parkplatz. – Schau mal da links, da ist [einer]!',
+'5. Ich suche eine Bäckerei. Gibt es [eine] in der Nähe? – Nein, hier ist [keine].',
+'6. Haben Sie ein Buch über Zürich? – Im Regal sehe ich [keins].'],
+'eine | einen | einer | keine | keiner | keins | welche'],
+['ÜB 4d · S. 128','Wir räumen auf! Ergänzen Sie die Possessivpronomen.',[
+'1. Wem gehört dieser Schlüssel? Ist das [deiner], David?',
+'2. Hast du meine Jacke gesehen? – Ist das da hinten auf dem Stuhl nicht [deine]?',
+'3. Ist das der Rucksack von Ben? – Ja, das ist [seiner].',
+'4. Sarah und David, sind das [eure] Sachen? – Nee, das sind nicht [unsere].',
+'5. Der Kalender gehört doch Mama, oder? – Ja, das ist [ihrer].',
+'6. Kann ich mal kurz [deins/deines] benutzen? – Tut mir leid, ich habe [meins/meines] im Büro vergessen.',
+'7. Ben, leg bitte deinen Pullover in den Schrank. – Das ist nicht [meiner]. Der gehört David.']],
+['ÜB 5 · S. 129','Ergänzen Sie irgendein / irgendeine / irgendwelche in der passenden Form.',[
+'1. Kennt ihr [irgendeine] coole Location? Habt ihr [irgendwelche] Tipps?',
+'2. Bevor du [irgendeine] teure Bar buchst: Du kannst gern in unserer Garage feiern.',
+'3. Wir sollten Philipp nicht einfach [irgendein] Geschenk kaufen.',
+'4. Jede/r macht mit ihm eine Tour durch [irgendein] Viertel.',
+'5. Und dann suchen wir jeweils [irgendeine] Kneipe aus.']],
+['ÜB 6a · S. 129','Morgens um fünf. Ergänzen Sie die Endungen.',[
+'Ferdy ist (1) Angestellt[er] im Krankenhaus. Auch die vier (2) Angestellt[en] der Bäckerei sind früh auf den Beinen. Zu den Aufgaben der (3) Bäckereiangestellt[e] Vera gehört es, das Brot zu bringen. Auch für Max, den (4) Angestellt[en] des Bauhofs, beginnt der Arbeitstag früh. Mit einem anderen (5) Angestellt[en] fährt er um fünf Uhr los.']],
+['ÜB 6b · S. 129','Ergänzen Sie die Nomen und achten Sie auf die Endungen.',[
+'1. Für die Patienten im Krankenhaus sind die Tage oft lang. Deshalb freut sich jeder [Kranke], wenn er Besuch von Freunden oder guten [Bekannten] bekommt.',
+'2. Ich wollte mit dem Arzt sprechen, aber nur [Angehörige] bekommen Informationen über die Patienten.',
+'3. Viele [Erwachsene] sind gestresst und träumen von einem ruhigen Leben auf dem Land.',
+'4. [Jugendliche] zwischen 14 und 17 langweilen sich auf dem Land oft schnell.',
+'5. In einer großen Stadt finden [Arbeitslose] schneller eine neue Stelle.'],
+'Angehörige | Arbeitslose | Bekannte | Erwachsene | Jugendliche | Kranke'],
+['ÜB 7 · S. 130','Hören Sie die fünf Texte (🔊 Computerstimme). Richtig oder falsch?',[
+'1. Der Film „Leben in der Stadt“ beginnt um 17 Uhr. '+F,
+'2. Das Rathaus befindet sich in der Karlsstraße. '+R,
+'3. Das Bürgerbüro ist am Dienstagnachmittag geöffnet. '+R,
+'4. Der Zug nach Leipzig fährt von Gleis 3 ab. '+F,
+'5. Das Geschäft befindet sich am Schillerplatz. '+F],'',T7],
+['ÜB 8a · S. 130','Was bedeutet das? Ergänzen Sie die Wörter aus der Buchstabenschlange (Marcos Blog).',[
+'1. Wie viele [Urlaubstage] gibt es?',
+'2. Durchschnittlicher [Arbeitsbeginn]',
+'3. Infos zur [Arbeitszeit]',
+'4. Infos zur [Kinderbetreuung]: Ab welchem Alter können Kinder in die Kita?',
+'5. Infos zum [Bildungsangebot]: Welche Schultypen gibt es?',
+'6. Infos zum [Gesundheitssystem]: Haben alle Personen eine Krankenversicherung?']],
+['ÜB 9a · S. 130','Streichen Sie das falsche Relativpronomen durch: Wählen Sie das richtige.',[
+'(1) Meinen Nachbarn, {*der|den} im Urlaub meine Blumen gießt.',
+'(2) Die Verkäuferin beim Bäcker, {für die|*mit der} ich jeden Morgen kurz spreche.',
+'(3) Herrn Korkmaz, {*den|dem} ich täglich an der Haltestelle sehe, würde ich vermissen.',
+'(4) Frau Jannis, {der|*die} mit ihrem Hund unterwegs ist.',
+'(5) Moritz, {der|*den} ich schon lange kenne.',
+'(6) Freunde, {*mit denen|von denen} ich viel Spaß habe.',
+'(7) Leon, {der|*dem} eine Kneipe gleich um die Ecke gehört.',
+'(8) Menschen, {*die|denen} in meinem Leben wichtig sind.']],
+['ÜB 9b · S. 131','was oder wo? Ergänzen Sie das richtige Relativpronomen.',[
+'1. In Berlin kann man viel unternehmen, {*was|wo} super ist.',
+'2. Alles, {*was|wo} man zum Leben braucht, gibt es hier.',
+'3. Ich suche noch eine tolle Wohnung, {was|*wo} ich ein paar Jahre bleiben kann.',
+'4. Ich fand auch die Stadt gut, {was|*wo} meine Freunde und ich am Wochenende waren.',
+'5. Für meine Freunde gab es dort fast nichts, {*was|wo} ihnen gefallen hat.',
+'6. Das, {*was|wo} ich ihnen gezeigt habe, fanden sie langweilig.',
+'7. Wir haben ein paar Clubs gefunden und gefeiert, {*was|wo} sie super fanden.',
+'8. Den nächsten Ort, {was|*wo} wir ein Wochenende verbringen, sollen meine Freunde aussuchen.']],
+['ÜB 10a · S. 131','Auf Standpunkte eingehen. A dass für viele Leute etwas anderes viel wichtiger ist · B wie viele Leute ganz andere und größere Probleme haben? · C dass es noch zwei andere Aspekte gibt · D ein wichtiger Punkt fehlt noch · E das stimmt meiner Meinung nach nicht',[
+'1. Was Sie hier gesagt haben, {A|B|C|D|*E}',
+'2. Das ist bestimmt wichtig für Sie. Sie vergessen aber, {*A|B|C|D|E}',
+'3. Das sind zwar interessante Punkte, aber {A|B|C|*D|E}',
+'4. Das ist ein wichtiger Aspekt, ja. Wir dürfen aber nicht außer Acht lassen, {A|B|*C|D|E}',
+'5. Das ist ein Problem. Aber haben Sie auch daran gedacht, {A|*B|C|D|E}']],
+['ÜB 10b · S. 131','In Diskussionen vermitteln. Ergänzen Sie die Ausdrücke (ausreden · haben · recht haben · sagen · sehen · vorschlagen).',[
+'1. Ich glaube, du [siehst] nur eine Seite.',
+'2. Wichtig ist doch auch, was Eva gerade [gesagt hat].',
+'3. Hast du eine Idee? Welche Lösung [schlägst] du [vor]?',
+'4. Ich denke, dass ihr beide zum Teil [recht habt].',
+'5. Bitte, lass doch Felice auch mal [ausreden].',
+'6. Das verstehe ich noch nicht. [Hast] du dafür auch ein konkretes Beispiel?']],
+['ÜB 12a · S. 132','Was man am Wochenende in einer Stadt machen kann. Ordnen Sie die Verben zu.',[
+'1. ein Fahrrad {steigen|*mieten|schwimmen|schauen|haben|entspannen|*fahren|wandern}',
+'2. im Fluss {steigen|mieten|*schwimmen|schauen|haben|entspannen|fahren|wandern}',
+'3. auf den See {steigen|mieten|schwimmen|*schauen|haben|entspannen|fahren|wandern}',
+'4. auf einen Turm {*steigen|mieten|schwimmen|schauen|haben|entspannen|fahren|wandern}',
+'5. auf einen Berg {steigen|mieten|schwimmen|schauen|haben|entspannen|fahren|*wandern}',
+'6. einen guten Ausblick {steigen|mieten|schwimmen|schauen|*haben|entspannen|fahren|wandern}',
+'7. in einem Park {steigen|mieten|schwimmen|schauen|haben|*entspannen|fahren|wandern}',
+'8. mit dem Boot {steigen|mieten|schwimmen|schauen|haben|entspannen|*fahren|wandern}']],
+['ÜB 12c · S. 133','Hören Sie die fünf Texte (🔊 Computerstimme). Wählen Sie die richtige Lösung.',[
+'1. Kamal ist krank geworden. '+F,
+'2. Annabell möchte am liebsten … {*a in eine Ausstellung gehen|b einen anderen Kurs machen|c zu Hause bleiben}',
+'3. Sie hören Informationen über ein Kinderfest. '+F,
+'4. Man soll zu dem Fest … {a zu Fuß kommen|b mit dem Auto kommen|*c mit dem Bus kommen}',
+'5. Das Wetter wird zum Wochenanfang wärmer. '+F,
+'6. Vorausgesagt werden sonnige Tage im … {a Westen|b Norden|*c Süden}',
+'7. Sie hören Informationen zu einer Veranstaltung. '+F,
+'8. Im Stadtzentrum Köln gibt es Stau wegen … {a eines Unfalls|b einer Baustelle|*c des Berufsverkehrs}',
+'9. Wegen des Wetters gibt es Flugänderungen. '+R,
+'10. Der Flug nach Genf … {a ist pünktlich|*b hat Verspätung|c fällt aus}'],'',T12],
+['ÜB 13a · S. 133','Mit welchen Adjektiven kann man eine Stadt beschreiben? Schreiben Sie das ganze Wort.',[
+'1. h _ k t _ s _ h [hektisch]','2. m _ d _ _ n [modern]','3. i n t _ r _ _ s a _ t [interessant]','4. s a _ b _ _ [sauber]',
+'5. r _ _ s _ g [riesig]','6. t e _ _ r [teuer]','7. l _ _ t [laut]','8. a t _ r _ _ t i v [attraktiv]']],
+['ÜB 13c · S. 134','E-Mail an einen Geschäftspartner. Ergänzen Sie die Formulierungen.',[
+'(1) [Sehr geehrte] Frau Lundin, bald findet unser großes Jahrestreffen statt. (2) [Hoffentlich haben Sie Lust bekommen], Sie und Ihr Team kennenzulernen. Der erste Nachmittag ist frei. (3) [Gerne zeigen] meine Kollegen und ich Ihnen dann die wichtigsten Sehenswürdigkeiten. Auch ein Spaziergang am Rhein (4) [wäre sehr schön]. (5) [Danach würden wir gerne] mit Ihrem Team ein traditionelles Restaurant besuchen. (6) [Wir freuen uns darauf], unsere Stadt kennenzulernen. (7) [Mit freundlichen Grüßen] Lars Thoeme'],
+'Danach würden wir gerne | Gerne zeigen | Hoffentlich haben Sie Lust bekommen | Mit freundlichen Grüßen | Sehr geehrte | Wir freuen uns darauf, | wäre sehr schön'],
+['ÜB Wortbildung · S. 134','Was ist richtig? Wählen Sie das passende Wort mit -einander.',[
+'1. Mara und ihre Eltern sehen sich selten, aber sie denken oft {übereinander|*aneinander}.',
+'2. Meine Freundin und ich lachen oft, wir haben viel Spaß {voneinander|*miteinander}.',
+'3. Unser Team ist super. Wir lernen viel {*voneinander|beieinander}.',
+'4. Meine Großeltern führen eine gute Beziehung. Sie sind {untereinander|*füreinander} da.',
+'5. Meine Freundin und ich wohnen nicht weit {*auseinander|ineinander}.']]
+];
+const $=s=>document.querySelector(s),m=$('#m');let S={};
+try{S=JSON.parse(localStorage.getItem('nw11')||'{}')}catch(e){}
+const sv=()=>{try{localStorage.setItem('nw11',JSON.stringify(S))}catch(e){}};
+const nz=s=>s.toLowerCase().replace(/ß/g,'ss').replace(/[.,!?…]/g,'').replace(/\s+/g,' ').trim();
+function fm(s){return s.replace(/\{([^}]*)\}/g,(_,o)=>'<select><option value="">…</option>'+o.split('|').map(x=>x[0]=='*'?'<option data-c="1">'+x.slice(1)+'</option>':'<option>'+x+'</option>').join('')+'</select>').replace(/\[([^\]]*)\]/g,(_,a)=>'<input data-a="'+a+'" size="'+Math.max(6,a.split('/')[0].length)+'" autocomplete="off" autocapitalize="off" spellcheck="false">')}
+E.forEach((e,n)=>{const d=document.createElement('section');d.className='ex';d.dataset.k=e[0].slice(0,2);
+d.innerHTML='<h2>'+e[0]+'</h2><p class="i">'+e[1]+'</p>'+(e[3]?'<p class="bank">'+e[3]+'</p>':'')+(e[4]?'<div class="tts">'+e[4].map((t,i)=>'<button data-t="'+i+'">▶ Text '+(i+1)+'</button>').join('')+'<button data-t="x">■</button></div>':'')+'<ol>'+e[2].map(i=>'<li>'+fm(i)+'</li>').join('')+'</ol><div class="act"><button class="ck">Prüfen</button><button class="g sl">Lösung</button><button class="g rs">Neu</button><span class="sc"></span></div>'+(e[4]?'<details><summary>Transkript</summary>'+e[4].map((t,i)=>'<p><b>'+(i+1)+'.</b> '+t+'</p>').join('')+'</details>':'');
+const cs=()=>[...d.querySelectorAll('select,input')];
+const mk=(c)=>c.tagName=='SELECT'?!!c.selectedOptions[0].dataset.c:c.dataset.a.split('/').some(a=>nz(a)==nz(c.value));
+d.onclick=ev=>{const b=ev.target;if(b.dataset.t){speechSynthesis.cancel();if(b.dataset.t!='x'){const u=new SpeechSynthesisUtterance(e[4][b.dataset.t]);u.lang='de-DE';u.rate=.85;speechSynthesis.speak(u)}}
+if(b.classList.contains('ck')){let ok=0;cs().forEach(c=>{const r=mk(c);ok+=r;c.classList.toggle('ok',r);c.classList.toggle('bad',!r)});const t=cs().length;d.querySelector('.sc').textContent=ok+' / '+t;S[n]=Math.max(S[n]||0,ok==t?1:0);d.classList.toggle('done',ok==t);sv();pr()}
+if(b.classList.contains('sl')){cs().forEach(c=>{if(c.tagName=='SELECT')c.selectedIndex=[...c.options].findIndex(o=>o.dataset.c);else c.value=c.dataset.a.split('/')[0]});d.querySelector('.ck').click()}
+if(b.classList.contains('rs')){cs().forEach(c=>{c.value='';c.classList.remove('ok','bad')});d.querySelector('.sc').textContent='';d.classList.remove('done')}};
+if(S[n])d.classList.add('done');m.appendChild(d)});
+function pr(){const n=Object.values(S).filter(Boolean).length;$('#pt').textContent=n+' / '+E.length+' Aufgaben gelöst';$('#pb').style.width=100*n/E.length+'%'}pr();
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x==b));document.querySelectorAll('.ex').forEach(x=>x.hidden=b.dataset.f&&x.dataset.k!=b.dataset.f)});
+</script></body></html>

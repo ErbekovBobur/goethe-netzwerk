@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Содержание упражнений к учебнику Netzwerk neu (A1–B2). 12 капитулов на каждом уровне. Локальные страницы упражнений.">
+  <title>Содержание · Netzwerk neu A1–B2</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface-hover: #243044;
+      --border: #2d3a4f;
+      --text: #e8eef7;
+      --text-muted: #94a3b8;
+      --accent-a1: #22c55e;
+      --accent-a2: #3b82f6;
+      --accent-b1: #a855f7;
+      --accent-b2: #f59e0b;
+      --radius: 12px;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: var(--accent-a2);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      z-index: 100;
+      font-weight: 600;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; outline: 3px solid #fff; outline-offset: 2px; }
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+    .header-inner { max-width: 1100px; margin: 0 auto; }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .logo-icon {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #e30613, #ffcc00);
+      border-radius: 8px;
+      display: grid; place-items: center;
+      font-weight: 800; font-size: 0.75rem; color: #fff;
+    }
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 580px;
+      margin: 0 auto 1.75rem;
+    }
+    .level-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .level-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .level-pill:hover, .level-pill:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+    .level-pill.a1 { background: rgba(34,197,94,0.15); color: var(--accent-a1); border-color: rgba(34,197,94,0.35); }
+    .level-pill.a1:hover, .level-pill.a1:focus-visible { background: rgba(34,197,94,0.25); }
+    .level-pill.a2 { background: rgba(59,130,246,0.15); color: var(--accent-a2); border-color: rgba(59,130,246,0.35); }
+    .level-pill.a2:hover, .level-pill.a2:focus-visible { background: rgba(59,130,246,0.25); }
+    .level-pill.b1 { background: rgba(168,85,247,0.15); color: var(--accent-b1); border-color: rgba(168,85,247,0.35); }
+    .level-pill.b1:hover, .level-pill.b1:focus-visible { background: rgba(168,85,247,0.25); }
+    .level-pill.b2 { background: rgba(245,158,11,0.15); color: var(--accent-b2); border-color: rgba(245,158,11,0.35); }
+    .level-pill.b2:hover, .level-pill.b2:focus-visible { background: rgba(245,158,11,0.25); }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+    .course {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 1.5rem;
+    }
+    .course-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .course-badge {
+      flex-shrink: 0;
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      display: grid; place-items: center;
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+    .course-badge.a1 { background: rgba(34,197,94,0.18); color: var(--accent-a1); }
+    .course-badge.a2 { background: rgba(59,130,246,0.18); color: var(--accent-a2); }
+    .course-badge.b1 { background: rgba(168,85,247,0.18); color: var(--accent-b1); }
+    .course-badge.b2 { background: rgba(245,158,11,0.18); color: var(--accent-b2); }
+    .course-meta { flex: 1; min-width: 200px; }
+    .course-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .course-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 640px;
+    }
+    .course-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--surface);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .chapters {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      list-style: none;
+    }
+    .chapter {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+    .chapter:hover, .chapter:focus-within {
+      background: var(--surface-hover);
+      border-color: #3d4f6a;
+      transform: translateY(-1px);
+    }
+    .chapter a {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 1rem 1.1rem;
+      text-decoration: none;
+      color: inherit;
+      height: 100%;
+    }
+    .chapter a:focus-visible {
+      outline: 2px solid var(--accent-a2);
+      outline-offset: 2px;
+      border-radius: var(--radius);
+    }
+    .ch-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: grid; place-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: var(--mono);
+      background: rgba(255,255,255,0.06);
+      color: var(--text-muted);
+    }
+    .course.a1 .ch-num { color: var(--accent-a1); }
+    .course.a2 .ch-num { color: var(--accent-a2); }
+    .course.b1 .ch-num { color: var(--accent-b1); }
+    .course.b2 .ch-num { color: var(--accent-b2); }
+    .ch-body { flex: 1; min-width: 0; }
+    .ch-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+      line-height: 1.35;
+    }
+    .ch-topics {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .howto {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 3rem;
+    }
+    .howto h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    .howto p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .howto ul {
+      margin: 0.75rem 0 0 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+    .howto li { margin-bottom: 0.35rem; }
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    @media (max-width: 640px) {
+      .course-header { flex-direction: column; align-items: flex-start; }
+      .chapters { grid-template-columns: 1fr; }
+      header { padding: 2rem 1rem 1.5rem; }
+      main { padding: 1.75rem 1rem 3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .level-pill, .chapter { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">N</span>
+        Netzwerk neu
+      </div>
+      <h1>Содержание упражнений</h1>
+      <p class="subtitle">Дополнительные упражнения к учебнику <strong>Netzwerk neu</strong> (Klett). Уровни A1–B2 · по 12 капитулов в каждом.</p>
+      <nav class="level-nav" aria-label="Быстрый переход к уровню">
+        <a class="level-pill a1" href="#a1">A1</a>
+        <a class="level-pill a2" href="#a2">A2</a>
+        <a class="level-pill b1" href="#b1">B1</a>
+        <a class="level-pill b2" href="#b2">B2</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="howto" aria-labelledby="howto-title">
+      <h2 id="howto-title">Как пользоваться</h2>
+      <p>Страница содержит ссылки на упражнения по каждому капитулу учебника <strong>Netzwerk neu</strong>.</p>
+      <ul>
+        <li>Все ссылки ведут на локальные файлы вида <code>A1/kapitel1.html</code>, <code>A2/kapitel3.html</code> и т.д.</li>
+        <li>Рекомендуется проходить капитулы последовательно в рамках уровня.</li>
+        <li>После выполнения упражнений можно вернуться на эту страницу через кнопку «Содержание» на страницах капитулов.</li>
+      </ul>
+    </section>
+
+    <!-- A1 -->
+    <section class="course a1" id="a1" aria-labelledby="a1-title">
+      <div class="course-header">
+        <div class="course-badge a1" aria-hidden="true">A1</div>
+        <div class="course-meta">
+          <h2 class="course-title" id="a1-title">A1 · Netzwerk neu</h2>
+          <p class="course-desc">Первый контакт с языком. Приветствия, знакомство, город, еда, повседневная жизнь, работа, квартира, покупки и отпуск.</p>
+          <div class="course-stats">
+            <span class="stat">12 Kapitel</span>
+            <span class="stat">Start Deutsch 1</span>
+          </div>
+        </div>
+      </div>
+      <ol class="chapters">
+        <li class="chapter"><a href="A1/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Guten Tag!</div><div class="ch-topics">Приветствие, представление, алфавит, числа, страны и языки</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Freunde, Kollegen und ich</div><div class="ch-topics">Хобби, друзья, коллеги, дни недели, времена года</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">In Hamburg</div><div class="ch-topics">Город, ориентирование, достопримечательности, вопросы о пути</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Guten Appetit!</div><div class="ch-topics">Еда и напитки, покупки, ресторан, приглашения</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Alltag und Familie</div><div class="ch-topics">Распорядок дня, время, семья, договорённости</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Zeit mit Freunden</div><div class="ch-topics">Свободное время, приглашения, планы</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Arbeitsalltag</div><div class="ch-topics">Работа, профессии, рабочий день</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Fit und gesund</div><div class="ch-topics">Здоровье, спорт, советы, императив</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Meine Wohnung</div><div class="ch-topics">Квартира, мебель, описание комнат</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Studium und Beruf</div><div class="ch-topics">Учёба, профессии, планы на будущее</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Die Jacke gefällt mir!</div><div class="ch-topics">Одежда, покупки, цвета, мнения</div></div></a></li>
+        <li class="chapter"><a href="A1/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Ab in den Urlaub!</div><div class="ch-topics">Отпуск, путешествия, погода, планы</div></div></a></li>
+      </ol>
+    </section>
+
+    <!-- A2 -->
+    <section class="course a2" id="a2" aria-labelledby="a2-title">
+      <div class="course-header">
+        <div class="course-badge a2" aria-hidden="true">A2</div>
+        <div class="course-meta">
+          <h2 class="course-title" id="a2-title">A2 · Netzwerk neu</h2>
+          <p class="course-desc">Расширение тем: прошлое, школа, медиа, чувства, городская жизнь, мобильность, спорт, совместная жизнь и развлечения.</p>
+          <div class="course-stats">
+            <span class="stat">12 Kapitel</span>
+            <span class="stat">Goethe-Zertifikat A2 / telc A2</span>
+          </div>
+        </div>
+      </div>
+      <ol class="chapters">
+        <li class="chapter"><a href="A2/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Und was machst du?</div><div class="ch-topics">Знакомство, рассказ о прошлом, договорённости</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Nach der Schulzeit</div><div class="ch-topics">Школа, воспоминания, жизненные пути</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">Immer online?</div><div class="ch-topics">Медиа, интернет, устройства, частота действий</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Große und kleine Gefühle</div><div class="ch-topics">Чувства, события, выражение эмоций</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Leben in der Stadt</div><div class="ch-topics">Городская жизнь, важные места, описания</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Arbeitswelten</div><div class="ch-topics">Мир работы, профессии, рабочие ситуации</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Ganz schön mobil</div><div class="ch-topics">Транспорт, мобильность, преимущества и недостатки</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Gelernt ist gelernt!</div><div class="ch-topics">Обучение, навыки, опыт, советы</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Sportlich, sportlich</div><div class="ch-topics">Спорт, виды спорта, предпочтения</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Zusammen leben</div><div class="ch-topics">Совместная жизнь, соседи, жильё</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Wie die Zeit vergeht!</div><div class="ch-topics">Время, этапы жизни, сравнение прошлого и настоящего</div></div></a></li>
+        <li class="chapter"><a href="A2/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Gute Unterhaltung!</div><div class="ch-topics">Развлечения, медиа, свободное время</div></div></a></li>
+      </ol>
+    </section>
+
+    <!-- B1 -->
+    <section class="course b1" id="b1" aria-labelledby="b1-title">
+      <div class="course-header">
+        <div class="course-badge b1" aria-hidden="true">B1</div>
+        <div class="course-meta">
+          <h2 class="course-title" id="b1-title">B1 · Netzwerk neu</h2>
+          <p class="course-desc">Самостоятельное использование языка: путешествия, техника, изменения в жизни, работа, экология, отношения, здоровье, искусство, общество и деньги.</p>
+          <div class="course-stats">
+            <span class="stat">12 Kapitel</span>
+            <span class="stat">Goethe-Zertifikat B1 / Zertifikat Deutsch</span>
+          </div>
+        </div>
+      </div>
+      <ol class="chapters">
+        <li class="chapter"><a href="B1/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Gute Reise!</div><div class="ch-topics">Путешествия, предпочтения, планирование, рассказы об отпуске</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Das ist ja praktisch!</div><div class="ch-topics">Техника, услуги, рекламации, аргументы за и против</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">Veränderungen</div><div class="ch-topics">Изменения в жизни, прошлое, счастье, поведение</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Arbeitswelt</div><div class="ch-topics">Работа, собеседования, извинения, советы</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Umweltfreundlich?</div><div class="ch-topics">Экология, устойчивое поведение, мнения</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Blick nach vorn</div><div class="ch-topics">Планы на будущее, прогнозы, цели</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Zwischenmenschliches</div><div class="ch-topics">Отношения, конфликты, дружба, семья</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Rund um Körper und Geist</div><div class="ch-topics">Здоровье, тело и дух, самочувствие</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Kunststücke</div><div class="ch-topics">Искусство, творчество, культурные события</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Miteinander</div><div class="ch-topics">Совместная жизнь, ценности, справедливость</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Stadt, Land, Fluss</div><div class="ch-topics">Город и деревня, регионы, описания мест</div></div></a></li>
+        <li class="chapter"><a href="B1/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Geld regiert die Welt?</div><div class="ch-topics">Деньги, банки, потребление, ценности</div></div></a></li>
+      </ol>
+    </section>
+
+    <!-- B2 -->
+    <section class="course b2" id="b2" aria-labelledby="b2-title">
+      <div class="course-header">
+        <div class="course-badge b2" aria-hidden="true">B2</div>
+        <div class="course-meta">
+          <h2 class="course-title" id="b2-title">B2 · Netzwerk neu</h2>
+          <p class="course-desc">Уверенное владение языком: общество, работа и карьера, медиа и информация, культура, наука, глобальные темы и аргументация.</p>
+          <div class="course-stats">
+            <span class="stat">12 Kapitel</span>
+            <span class="stat">Goethe-Zertifikat B2</span>
+          </div>
+        </div>
+      </div>
+      <ol class="chapters">
+        <li class="chapter"><a href="B2/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Gesellschaft im Wandel</div><div class="ch-topics">Общественные изменения, поколения, ценности</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Arbeit und Karriere</div><div class="ch-topics">Карьера, рынок труда, профессиональное развитие</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">Medien und Information</div><div class="ch-topics">СМИ, фейковые новости, критическое мышление</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Bildung und Lernen</div><div class="ch-topics">Образование, lifelong learning, методы обучения</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Umwelt und Klima</div><div class="ch-topics">Климат, устойчивое развитие, экологические проекты</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Kultur und Identität</div><div class="ch-topics">Культурная идентичность, традиции, многообразие</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Wissenschaft und Technik</div><div class="ch-topics">Наука, инновации, этика технологий</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Gesundheit und Lebensstil</div><div class="ch-topics">Здоровый образ жизни, медицина, профилактика</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Wirtschaft und Konsum</div><div class="ch-topics">Экономика, потребление, устойчивый бизнес</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Politik und Gesellschaft</div><div class="ch-topics">Политика, гражданское общество, участие</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Mobilität und Globalisierung</div><div class="ch-topics">Глобализация, миграция, мобильность</div></div></a></li>
+        <li class="chapter"><a href="B2/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Zukunft gestalten</div><div class="ch-topics">Будущее, инновации, личная ответственность</div></div></a></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>Netzwerk neu · Übungen · A1–B2 · Локальные страницы капитулов</p>
+  </footer>
+</body>
+</html>
