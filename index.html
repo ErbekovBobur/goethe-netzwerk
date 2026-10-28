@@ -1,425 +1,479 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Содержание упражнений к учебнику Netzwerk neu (A1–B2). 12 капитулов на каждом уровне. Локальные страницы упражнений.">
-  <link rel="shortcut icon" href="./ico.webp" type="image/x-icon">
-  <title>Содержание · Netzwerk neu A1–B2</title>
-  <style>
-    :root {
-      --bg: #0f1419;
-      --surface: #1a2332;
-      --surface-hover: #243044;
-      --border: #2d3a4f;
-      --text: #e8eef7;
-      --text-muted: #94a3b8;
-      --accent-a1: #22c55e;
-      --accent-a2: #3b82f6;
-      --accent-b1: #a855f7;
-      --accent-b2: #f59e0b;
-      --radius: 12px;
-      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
-      --mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-    .skip-link {
-      position: absolute;
-      top: -100px;
-      left: 16px;
-      background: var(--accent-a2);
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 8px;
-      z-index: 100;
-      font-weight: 600;
-      text-decoration: none;
-      transition: top 0.2s;
-    }
-    .skip-link:focus { top: 16px; outline: 3px solid #fff; outline-offset: 2px; }
-    header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 2.5rem 1.5rem 2rem;
-      text-align: center;
-    }
-    .header-inner { max-width: 1100px; margin: 0 auto; }
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .logo-icon {
-      width: 28px; height: 28px;
-      background: linear-gradient(135deg, #e30613, #ffcc00);
-      border-radius: 8px;
-      display: grid; place-items: center;
-      font-weight: 800; font-size: 0.75rem; color: #fff;
-    }
-    h1 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-    }
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 580px;
-      margin: 0 auto 1.75rem;
-    }
-    .level-nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.6rem;
-    }
-    .level-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.55rem 1.1rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      border: 1px solid transparent;
-      transition: transform 0.15s, background 0.15s, border-color 0.15s;
-    }
-    .level-pill:hover, .level-pill:focus-visible {
-      transform: translateY(-2px);
-      outline: none;
-    }
-    .level-pill.a1 { background: rgba(34,197,94,0.15); color: var(--accent-a1); border-color: rgba(34,197,94,0.35); }
-    .level-pill.a1:hover, .level-pill.a1:focus-visible { background: rgba(34,197,94,0.25); }
-    .level-pill.a2 { background: rgba(59,130,246,0.15); color: var(--accent-a2); border-color: rgba(59,130,246,0.35); }
-    .level-pill.a2:hover, .level-pill.a2:focus-visible { background: rgba(59,130,246,0.25); }
-    .level-pill.b1 { background: rgba(168,85,247,0.15); color: var(--accent-b1); border-color: rgba(168,85,247,0.35); }
-    .level-pill.b1:hover, .level-pill.b1:focus-visible { background: rgba(168,85,247,0.25); }
-    .level-pill.b2 { background: rgba(245,158,11,0.15); color: var(--accent-b2); border-color: rgba(245,158,11,0.35); }
-    .level-pill.b2:hover, .level-pill.b2:focus-visible { background: rgba(245,158,11,0.25); }
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
-    }
-    .course {
-      margin-bottom: 3.5rem;
-      scroll-margin-top: 1.5rem;
-    }
-    .course-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      gap: 1rem 1.5rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .course-badge {
-      flex-shrink: 0;
-      width: 64px; height: 64px;
-      border-radius: 16px;
-      display: grid; place-items: center;
-      font-weight: 800;
-      font-size: 1.35rem;
-      letter-spacing: -0.03em;
-    }
-    .course-badge.a1 { background: rgba(34,197,94,0.18); color: var(--accent-a1); }
-    .course-badge.a2 { background: rgba(59,130,246,0.18); color: var(--accent-a2); }
-    .course-badge.b1 { background: rgba(168,85,247,0.18); color: var(--accent-b1); }
-    .course-badge.b2 { background: rgba(245,158,11,0.18); color: var(--accent-b2); }
-    .course-meta { flex: 1; min-width: 200px; }
-    .course-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    .course-desc {
-      color: var(--text-muted);
-      font-size: 0.98rem;
-      max-width: 640px;
-    }
-    .course-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 0.75rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .stat {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      background: var(--surface);
-      padding: 0.3rem 0.7rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-    }
-    .chapters {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 0.75rem;
-      list-style: none;
-    }
-    .chapter {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: background 0.15s, border-color 0.15s, transform 0.15s;
-    }
-    .chapter:hover, .chapter:focus-within {
-      background: var(--surface-hover);
-      border-color: #3d4f6a;
-      transform: translateY(-1px);
-    }
-    .chapter a {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-      padding: 1rem 1.1rem;
-      text-decoration: none;
-      color: inherit;
-      height: 100%;
-    }
-    .chapter a:focus-visible {
-      outline: 2px solid var(--accent-a2);
-      outline-offset: 2px;
-      border-radius: var(--radius);
-    }
-    .ch-num {
-      flex-shrink: 0;
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      display: grid; place-items: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      font-family: var(--mono);
-      background: rgba(255,255,255,0.06);
-      color: var(--text-muted);
-    }
-    .course.a1 .ch-num { color: var(--accent-a1); }
-    .course.a2 .ch-num { color: var(--accent-a2); }
-    .course.b1 .ch-num { color: var(--accent-b1); }
-    .course.b2 .ch-num { color: var(--accent-b2); }
-    .ch-body { flex: 1; min-width: 0; }
-    .ch-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 0.15rem;
-      line-height: 1.35;
-    }
-    .ch-topics {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-    .howto {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem 1.75rem;
-      margin-bottom: 3rem;
-    }
-    .howto h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-    }
-    .howto p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-    }
-    .howto ul {
-      margin: 0.75rem 0 0 1.25rem;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-    }
-    .howto li { margin-bottom: 0.35rem; }
-    footer {
-      text-align: center;
-      padding: 2rem 1.5rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-    @media (max-width: 640px) {
-      .course-header { flex-direction: column; align-items: flex-start; }
-      .chapters { grid-template-columns: 1fr; }
-      header { padding: 2rem 1rem 1.5rem; }
-      main { padding: 1.75rem 1rem 3rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .level-pill, .chapter { transition: none; }
-    }
-  </style>
-</head>
-<body>
-  <a class="skip-link" href="#main">Перейти к содержанию</a>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Netzwerk neu B1 · Kapitel 10 + 11 interaktiv</title>
+<style>
+:root{--bg:#f3f8fa;--card:#fff;--tx:#14303a;--mu:#506b76;--ac:#0a6f89;--ac2:#e8f4f8;--ok:#17743f;--bad:#b3261e;--bd:#cddde4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f181c;--card:#17252b;--tx:#e8f1f4;--mu:#9bb2bb;--ac:#56c4df;--ac2:#1d3640;--ok:#52cc86;--bad:#ff8a7c;--bd:#2d4049;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0f181c;--card:#17252b;--tx:#e8f1f4;--mu:#9bb2bb;--ac:#56c4df;--ac2:#1d3640;--ok:#52cc86;--bad:#ff8a7c;--bd:#2d4049;color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border-bottom:1px solid var(--bd);padding:8px 14px;z-index:5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:6}
+.hr{display:flex;align-items:center;gap:8px;max-width:800px;margin:0 auto}
+header h1{margin:0;font-size:1.02rem;flex:1}
+.bar{height:8px;background:var(--bd);border-radius:4px;margin:6px auto 0;max-width:800px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac);width:0;transition:width .3s}
+#pt{max-width:800px;margin:2px auto 0;font-size:.85rem;color:var(--mu)}
+.tools{display:flex;flex-wrap:wrap;gap:6px;max-width:800px;margin:10px auto 0;padding:0 12px;align-items:center}
+.chip,.ib,button.b{font:inherit;min-height:44px;padding:6px 14px;border-radius:22px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ac);color:#fff;border-color:var(--ac)}
+.ib{border-radius:10px;min-width:44px;padding:6px 10px}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+main{max-width:800px;margin:0 auto;padding:10px 12px 40px}
+h3.ch{margin:22px 4px 8px;font-size:1.15rem;color:var(--ac)}
+.ex{background:var(--card);border:1px solid var(--bd);border-left:5px solid var(--bd);border-radius:12px;padding:12px 16px;margin-bottom:14px}
+.ex.done{border-left-color:var(--ok)}
+.ex h2{margin:0;font-size:.8rem;color:var(--ac);letter-spacing:.02em;display:flex;gap:8px;justify-content:space-between}
+.ex.done h2::after{content:"✓ gelöst";color:var(--ok)}
+.ex p.i{margin:4px 0 8px;font-weight:600}.bank{background:var(--ac2);border-radius:8px;padding:6px 10px;font-size:.92rem;margin:0 0 8px}
+ol{padding:0;list-style:none;margin:0}li{padding:7px 0;border-top:1px dashed var(--bd)}
+select,input[type=text],textarea{font:inherit;color:var(--tx);background:var(--bg);border:1.5px solid var(--bd);border-radius:8px;padding:5px 8px;max-width:100%;min-height:38px}
+textarea{width:100%;display:block;margin-top:4px}
+input[type=text]{min-width:5.5em}
+.cb{display:inline-flex;align-items:center;gap:6px;margin:2px 10px 2px 0;min-height:36px}.cb input{width:20px;height:20px}
+.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 14%,var(--bg))}.bad{border-color:var(--bad)!important;background:color-mix(in srgb,var(--bad) 14%,var(--bg))}
+.mk{font-weight:700;margin-left:4px}.mk.ok{color:var(--ok);background:none}.mk.bad{color:var(--bad);background:none}
+.act{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+button.b{border-radius:10px;border-color:var(--ac);color:var(--ac)}button.b.p{background:var(--ac);color:var(--bg)}
+.sc{font-weight:700}.tts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+details{margin-top:10px;color:var(--mu);font-size:.92rem}details[open]{color:var(--tx)}
+.tk{font:inherit;border:0;background:none;color:var(--tx);padding:4px 2px;margin:1px;border-radius:6px;cursor:pointer;min-height:36px}.tk:hover{background:var(--ac2)}.tk.bad{background:color-mix(in srgb,var(--bad) 18%,var(--bg))}.pz{color:var(--ac);font-weight:700}
+.vr{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--bd)}.vr .w{flex:1 1 220px;font-weight:600}.vr input[type=text]{flex:1 1 160px}
+footer{max-width:800px;margin:0 auto;padding:0 12px 30px;color:var(--mu);font-size:.85rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><div class="hr"><h1>Netzwerk neu B1 · Kapitel 10 &amp; 11</h1><button class="ib" id="th" aria-label="Farbschema wechseln">◐</button></div>
+<div class="bar" role="progressbar" aria-label="Gesamtfortschritt"><i id="pb"></i></div><div id="pt" role="status"></div></header>
+<div class="tools" role="group" aria-label="Filter">
+<button class="chip" data-g="c" data-v="" aria-pressed="true">Alle Kapitel</button><button class="chip" data-g="c" data-v="10" aria-pressed="false">Kapitel 10</button><button class="chip" data-g="c" data-v="11" aria-pressed="false">Kapitel 11</button>
+<span style="flex-basis:100%"></span>
+<button class="chip" data-g="b" data-v="" aria-pressed="true">Alles</button><button class="chip" data-g="b" data-v="KB" aria-pressed="false">Kursbuch</button><button class="chip" data-g="b" data-v="ÜB" aria-pressed="false">Übungsbuch</button><button class="chip" data-g="b" data-v="WS" aria-pressed="false">Wortschatz</button>
+<span style="flex-basis:100%"></span>
+<button class="chip" id="op" aria-pressed="false">Nur offene</button>
+<label style="margin-left:auto">🔊 Tempo <select id="rate" aria-label="Sprechtempo"><option value="0.7">langsam</option><option value="0.85" selected>normal</option><option value="1">schnell</option></select></label>
+</div>
+<main id="m"></main>
+<footer>Fortschritt und Antworten werden nur in diesem Browser gespeichert. Hörtexte werden von der Computerstimme Ihres Geräts vorgelesen (Originalaudio nicht enthalten). Lösungen nach den Lösungsschlüsseln von Klett; „Lösungsmuster“ sind Beispiele, andere Antworten können ebenfalls richtig sein. <button class="b" id="rs">Fortschritt zurücksetzen</button></footer>
+<script>
+const R='{*richtig|falsch}',F='{richtig|*falsch}';
+const T7=['Und hier noch eine Information zum Filmfest im Stadtmuseum. Der Film „Leben in der Stadt“ läuft heute nicht wie im Programm angekündigt um 17:00 Uhr, sondern bereits um 16:00 Uhr. Um 18:00 Uhr beginnt dann bereits die Fragerunde mit dem Regisseur. Das Filmprogramm für den Abend beginnt dann um 20:00 Uhr. Tickets gibt es direkt an der Kasse des Stadtmuseums.',
+'Am besten fahren Sie von hier mit der Straßenbahn zum Hauptbahnhof. Dort gehen Sie dann nach rechts in die Frauenstraße. Sie kommen dann an eine große Kreuzung. Da können Sie das Rathaus schon sehen. Gehen Sie über die Straße in die Müllerstraße und dann in die Karlsstraße. Direkt dort ist das Rathaus. Es gibt viele Parkplätze in der Müllerstraße, wenn Sie lieber mit dem Auto fahren wollen.',
+'Vielen Dank für Ihren Anruf. Sie rufen außerhalb unserer Öffnungs- und Sprechzeiten an. Das Bürgerbüro ist von Montag bis Freitag von 8 bis 14 Uhr geöffnet. Am Dienstag und Donnerstag sind wir auch in der Zeit von 15 bis 17 Uhr für Sie da. Bitte beachten Sie, dass telefonische Anfragen nur zu den regulären Öffnungszeiten beantwortet werden können. Vielen Dank und auf Wiederhören.',
+'Intercity 1651 nach Leipzig, Abfahrt 13 Uhr 17. Der Intercity 1651 nach Leipzig fährt heute aufgrund seiner Verspätung von 30 Minuten nicht planmäßig von Gleis 3, sondern von Gleis 10. Reisende nach Leipzig: Bitte begeben Sie sich zu Gleis 10. Einfahrt auf Gleis 3 hat der Intercityexpress 627 nach München.',
+'Wir sind umgezogen. Ab sofort finden Sie MikaModen nicht mehr am Schillerplatz, sondern in der Blumenstraße 3, direkt in der Stadtmitte. Kommen Sie noch heute und feiern Sie mit uns die große Eröffnungsfeier mit zahlreichen Angeboten! Für jeden Kunden gibt es auch ein kleines Willkommensgeschenk. MikaModen – Ihr Spezialist für Mode!'];
+const T12=['Hallo Kamal, hier ist Annabell. Ich rufe an wegen Samstag. Wir hatten uns doch zu dem Foto-Wochenendkurs in Zürich angemeldet. Aber gerade hat mich jemand angerufen und gesagt, dass der Kurs ausfällt, weil der Kursleiter krank geworden ist. Jetzt wollte ich mal fragen, was wir denn sonst machen könnten. Zu Hause bleiben will ich nicht. Sollen wir dann in eine Foto-Ausstellung gehen? Dazu hätte ich eigentlich am meisten Lust. Oder wir suchen uns einen anderen Kurs? Schau doch nach, was es gibt und was dich interessiert. Und dann rufen wir uns zusammen. Bis dann.',
+'Das Wochenende steht vor der Tür und Sie haben noch nichts vor? Dann auf nach Köln-Nippes. Da findet an diesem Wochenende wie jedes Jahr im Mai das traditionelle Straßenfest statt. Genießen Sie bei einem gemütlichen Spaziergang durchs Viertel dieses wunderbare Bürgerfest. Geboten werden Live-Musik und zahlreiche Attraktionen für Kinder. Auch für das leibliche Wohl ist mit internationalen Spezialitäten gesorgt. Aufgrund des hohen Besucherandrangs kommen Sie bitte nicht mit dem Auto, sondern am besten mit dem Bus. Beginn ist Freitag um 16 Uhr, Ende Sonntag 20 Uhr. Viel Spaß!',
+'Und hier noch die aktuellen Wetteraussichten. Zum Wochenstart gelangt spürbar kältere Luft zu uns. Vor allem die Nächte werden sehr kalt, bei Temperaturen bis zu minus 10 Grad. Tagsüber lässt sich die Sonne nur im Süden sehen, Höchsttemperaturen bis 3 Grad. Im Norden bleibt der Himmel den ganzen Tag bewölkt, im Westen ist mit starkem Wind zu rechnen. Ab Wochenmitte wird es deutlich milder, die Temperaturen steigen im ganzen Land wieder auf 10 bis 12 Grad plus. Ab Freitag ist vermehrt mit Regen zu rechnen.',
+'Achtung Autofahrer. Auf der A3 Köln Richtung Oberhausen zwischen Kreuz Ratingen-Ost und Kreuz Breitscheid zwei Kilometer Stau wegen Unfall. Dort ist der rechte Fahrstreifen gesperrt. Wegen einer Großbaustelle ist mit Behinderungen auch auf der Autobahn A1 Anschlussstelle Lövenich zu rechnen. Auch in Köln kommt es aufgrund des starken Berufsverkehrs in der Stadtmitte zu Behinderungen. Achtung Autofahrer in Düsseldorf. Dort sind wegen einer Veranstaltung im Zentrum mehrere Straßen gesperrt.',
+'Flug LH 309 nach Genf. Leider verzögert sich der Flug nach Genf. Momentan rechnen wir mit einer Verspätung von mindestens 60 Minuten. Grund dafür ist der anhaltende Sturm über der Westschweiz. Passagiere, die von Genf aus Anschlussflüge haben, melden sich bitte umgehend an Gate 5. Flug LH 742 von Zürich nach Mailand. Dieser Flug muss wegen der starken Schneefälle ausfallen. Passagiere nach Mailand. Bitte kommen Sie für weitere Informationen zu Gate 3.'];
+const E11=[
+['KB 4b · S. 54','Lesen Sie die Kommentare im Forum (Kursbuch S. 54). Zu wem passt welcher Satz?',[
+'1. … mag den Lärm in der Stadt nicht und fährt oft in die Natur. {HanSolo|*Bine|Satti|MoMa}',
+'2. … gefallen die Menschen und Veranstaltungen in der Stadt. {*HanSolo|Bine|Satti|MoMa}',
+'3. … glaubt, dass man nur in der Stadt wirklich frei leben kann. {HanSolo|Bine|Satti|*MoMa}',
+'4. … findet das Leben in der Stadt zu teuer. {HanSolo|Bine|*Satti|MoMa}']],
+['KB 6c · S. 55','Lesen Sie den Magazinbericht „Morgens um fünf“ (Kursbuch S. 55). Richtig oder falsch?',[
+'1. Ferdy hatte heute im Nachtdienst nicht mehr Arbeit als üblich. '+R,
+'2. In der Bäckerei arbeiten seit 2 Uhr nachts fünf Personen. '+F,
+'3. Die Fahrerin lädt das frische Brot allein ins Auto. '+F,
+'4. Im Bauhof der Stadt wird die ganze Nacht gearbeitet. '+F,
+'5. Der Obdachlose kann für ein paar Stunden im Bauhof schlafen. '+R]],
+['KB 6d · S. 55','Adjektive als Nomen: Ergänzen Sie die Endungen.',[
+'1. Nick, ein Bekannt[er] von mir, ist Angestellt[er] bei der Stadt.',
+'2. Er ist Sozialarbeiter und betreut Jugendlich[e].',
+'3. Gestern habe ich mit einer Verwandt[en] gesprochen.',
+'4. Sie arbeitet auch mit Jugendlich[en].']],
+['KB 9a · S. 56','Hören Sie die vier Personen (Track 2.37). Wer sagt was?',[
+'1. Dort, wo ich wohne, arbeitet man im Durchschnitt länger als in den anderen Städten. {München|Hamburg|Berlin|*Zürich}',
+'2. Die Stadt tut auch etwas für ärmere Menschen, was ich sehr wichtig finde. {München|*Hamburg|Berlin|Zürich}',
+'3. Ich lebe gerne in einer Stadt, wo der Arbeitstag nicht so früh beginnt. {München|Hamburg|*Berlin|Zürich}',
+'4. Das, was eine Stadt im Ranking attraktiv macht, kann für die Menschen auch Nachteile bringen. {*München|Hamburg|Berlin|Zürich}',
+'5. Das Wetter ist nichts, was im Ranking gewertet wird. {München|*Hamburg|Berlin|Zürich}']],
+['KB 13b · S. 59','Welche Formulierungen passen zu wem? A = Brief an einen guten Freund, B = Brief an einen Geschäftspartner (Sie).',[
+'1. bald kommen Sie zu uns nach … {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|*B Einleitung|B Schluss|B Gruß}',
+'2. Bis bald {A Anrede|A Einleitung|A Schluss|*A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'3. Gerne zeigen meine Kollegen und ich Ihnen einige Sehenswürdigkeiten. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|*B Schluss|B Gruß}',
+'4. Hallo …, {*A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'5. Hoffentlich gefallen dir die Vorschläge. {A Anrede|A Einleitung|*A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'6. Viele Grüße {A Anrede|A Einleitung|A Schluss|*A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'7. Hoffentlich haben Sie Lust bekommen, die Stadt kennenzulernen. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|*B Schluss|B Gruß}',
+'8. Sehr geehrter Herr …, {A Anrede|A Einleitung|A Schluss|A Gruß|*B Anrede|B Einleitung|B Schluss|B Gruß}',
+'9. ich freue mich sehr, dass du mich bald besuchen kommst. {A Anrede|*A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'11. Meine Kollegen und ich freuen uns schon darauf, Sie kennenzulernen. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|*B Einleitung|B Schluss|B Gruß}',
+'12. Mit freundlichen Grüßen {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|*B Gruß}',
+'13. Ich freue mich schon darauf, dir „meine Stadt“ zu zeigen. {A Anrede|*A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß}',
+'14. Ich freue mich / Wir freuen uns, Sie bald hier zu begrüßen. {A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|*B Schluss|B Gruß}']],
+['ÜB 1 · S. 126','Ergänzen Sie das passende Wort aus dem Kasten.',[
+'1. In unserer Stadt sind viele verschiedene … unterwegs: Autos, Busse, Fahrräder, U-Bahnen. [Fahrzeuge]',
+'2. Hier ist es viel zu laut. Bei diesem … kann ich mich nicht entspannen. [Lärm]',
+'3. Ich mag die … Dort gibt es viele Geschäfte und keine Autos. [Fußgängerzone]',
+'4. Die Luft ist schlecht, weil es so viel … gibt. [Verkehr]',
+'5. Mit welcher … darf man in der Stadt fahren? 50 km/h? [Geschwindigkeit]',
+'6. Die Viertel einer Stadt sind sehr verschieden. Jeder … sieht anders aus. [Stadtteil]',
+'7. Alle Geschäfte waren geschlossen. Ich konnte mir nur die … ansehen. [Schaufenster]',
+'8. Diese Straße ist schmutzig! Wer macht den … weg? [Dreck]',
+'9. Ich wohne im 12. Stock. Die … ist super. [Aussicht]',
+'10. Frau Dinkel von nebenan ist sehr hilfsbereit. Sie ist eine tolle … [Nachbarin/Nachbarn]',
+'11. So schön, direkt am Park! Die … der Wohnung ist echt toll. [Lage]',
+'12. Mein Arbeitsplatz ist mitten in der Stadt. In unserem … gibt es 1.000 Mitarbeiter. [Unternehmen]'],
+'Aussicht | Dreck | Fahrzeuge | Fußgängerzone | Geschwindigkeit | Lage | Lärm | Nachbarn | Schaufenster | Stadtteil | Unternehmen | Verkehr'],
+['ÜB 2a · S. 126','Was passt zusammen? Ordnen Sie zu.',[
+'1. alle Ecken der Stadt {finden|*kennen|machen|renovieren|suchen|ziehen}',
+'2. alte Häuser {finden|kennen|machen|*renovieren|suchen|ziehen}',
+'3. dringend eine neue Wohnung {finden|kennen|machen|renovieren|*suchen|ziehen}',
+'4. endlich einen Parkplatz {*finden|kennen|machen|renovieren|suchen|ziehen}',
+'5. mit dem Motorrad Touren {finden|kennen|*machen|renovieren|suchen|ziehen}',
+'6. durch ein paar Kneipen {finden|kennen|machen|renovieren|suchen|*ziehen}']],
+['ÜB 3 · S. 127','Sie sind im Rathaus. In welches Zimmer gehen Sie? 110 Gesundheit/Impfungen · 111 Geburten, Heirat, Namensänderung · 112 An-/Ummeldung, Ausweise · 113 Schulen, Kitas, Elterngeld · 114 Einbürgerung, Aufenthalt · 201 Büchereien · 202 Baugenehmigung, Hundesteuer · 203 Kfz, Parkausweise · 204 Fundbüro, Parkstrafen',[
+'1. Sie haben gestern Ihre Jacke an der Bushaltestelle vergessen. {a Zimmer 201|*b Zimmer 204|c anderes Zimmer}',
+'2. Sie möchten wieder arbeiten und brauchen eine Betreuung für Ihr Kind. {*a Zimmer 113|b Zimmer 114|c anderes Zimmer}',
+'3. Sie haben geheiratet und wollen den Nachnamen Ihrer Frau annehmen. {*a Zimmer 111|b Zimmer 112|c anderes Zimmer}',
+'4. Sie sind wegen Ihrer neuen Stelle umgezogen und haben eine neue Adresse. {a Zimmer 110|b Zimmer 114|*c anderes Zimmer}',
+'5. Sie haben aus dem Tierheim einen Hund geholt und möchten ihn anmelden. {a Zimmer 112|*b Zimmer 202|c anderes Zimmer}']],
+['ÜB 4a · S. 128','Artikelwörter als Pronomen. Was ist richtig? (Simons Forumsbeitrag)',[
+'Seid ihr Stadtmenschen? Ich bin (1) {keine|*keiner}. Ich fühle mich auf dem Land wohler. Jetzt habe ich endlich (2) {eins|*einen}. Ich habe ein Haus gekauft. Es ist sehr klein, aber es ist (3) {*meins|meine}! Hier auf dem Land braucht man eigentlich ein Auto. Aber ich habe noch (4) {keiner|*keins}. Freunde fragen mich, ob es in dem Dorf auch Geschäfte gibt. Ja, zum Glück gibt es (5) {*welche|welchen}. Neben mir wohnt (6) {einer|*eine}, die drei Hunde hat. Es gibt da (7) {einer|*eins} gleich in der Nähe.']],
+['ÜB 4c · S. 128','Was passt wo? Ergänzen Sie.',[
+'1. Wo sind die anderen Studenten? Warum ist noch [keiner] da? – Na ja, wir sind zu früh.',
+'2. Morgen kaufe ich einen neuen Computer. – Was? Du hast doch erst [einen] gekauft.',
+'3. Wo finde ich weiße T-Shirts? – Da hinten auf dem Tisch liegen [welche].',
+'4. Jetzt brauche ich nur noch einen Parkplatz. – Schau mal da links, da ist [einer]!',
+'5. Ich suche eine Bäckerei. Gibt es [eine] in der Nähe? – Nein, hier ist [keine].',
+'6. Haben Sie ein Buch über Zürich? – Im Regal sehe ich [keins].'],
+'eine | einen | einer | keine | keiner | keins | welche'],
+['ÜB 4d · S. 128','Wir räumen auf! Ergänzen Sie die Possessivpronomen.',[
+'1. Wem gehört dieser Schlüssel? Ist das [deiner], David?',
+'2. Hast du meine Jacke gesehen? – Ist das da hinten auf dem Stuhl nicht [deine]?',
+'3. Ist das der Rucksack von Ben? – Ja, das ist [seiner].',
+'4. Sarah und David, sind das [eure] Sachen? – Nee, das sind nicht [unsere].',
+'5. Der Kalender gehört doch Mama, oder? – Ja, das ist [ihrer].',
+'6. Kann ich mal kurz [deins/deines] benutzen? – Tut mir leid, ich habe [meins/meines] im Büro vergessen.',
+'7. Ben, leg bitte deinen Pullover in den Schrank. – Das ist nicht [meiner]. Der gehört David.']],
+['ÜB 5 · S. 129','Ergänzen Sie irgendein / irgendeine / irgendwelche in der passenden Form.',[
+'1. Kennt ihr [irgendeine] coole Location? Habt ihr [irgendwelche] Tipps?',
+'2. Bevor du [irgendeine] teure Bar buchst: Du kannst gern in unserer Garage feiern.',
+'3. Wir sollten Philipp nicht einfach [irgendein] Geschenk kaufen.',
+'4. Jede/r macht mit ihm eine Tour durch [irgendein] Viertel.',
+'5. Und dann suchen wir jeweils [irgendeine] Kneipe aus.']],
+['ÜB 6a · S. 129','Morgens um fünf. Ergänzen Sie die Endungen.',[
+'Ferdy ist (1) Angestellt[er] im Krankenhaus. Auch die vier (2) Angestellt[en] der Bäckerei sind früh auf den Beinen. Zu den Aufgaben der (3) Bäckereiangestellt[e] Vera gehört es, das Brot zu bringen. Auch für Max, den (4) Angestellt[en] des Bauhofs, beginnt der Arbeitstag früh. Mit einem anderen (5) Angestellt[en] fährt er um fünf Uhr los.']],
+['ÜB 6b · S. 129','Ergänzen Sie die Nomen und achten Sie auf die Endungen.',[
+'1. Für die Patienten im Krankenhaus sind die Tage oft lang. Deshalb freut sich jeder [Kranke], wenn er Besuch von Freunden oder guten [Bekannten] bekommt.',
+'2. Ich wollte mit dem Arzt sprechen, aber nur [Angehörige] bekommen Informationen über die Patienten.',
+'3. Viele [Erwachsene] sind gestresst und träumen von einem ruhigen Leben auf dem Land.',
+'4. [Jugendliche] zwischen 14 und 17 langweilen sich auf dem Land oft schnell.',
+'5. In einer großen Stadt finden [Arbeitslose] schneller eine neue Stelle.'],
+'Angehörige | Arbeitslose | Bekannte | Erwachsene | Jugendliche | Kranke'],
+['ÜB 7 · S. 130','Hören Sie die fünf Texte (🔊 Computerstimme). Richtig oder falsch?',[
+'1. Der Film „Leben in der Stadt“ beginnt um 17 Uhr. '+F,
+'2. Das Rathaus befindet sich in der Karlsstraße. '+R,
+'3. Das Bürgerbüro ist am Dienstagnachmittag geöffnet. '+R,
+'4. Der Zug nach Leipzig fährt von Gleis 3 ab. '+F,
+'5. Das Geschäft befindet sich am Schillerplatz. '+F],'',T7],
+['ÜB 8a · S. 130','Was bedeutet das? Ergänzen Sie die Wörter aus der Buchstabenschlange (Marcos Blog).',[
+'1. Wie viele [Urlaubstage] gibt es?',
+'2. Durchschnittlicher [Arbeitsbeginn]',
+'3. Infos zur [Arbeitszeit]',
+'4. Infos zur [Kinderbetreuung]: Ab welchem Alter können Kinder in die Kita?',
+'5. Infos zum [Bildungsangebot]: Welche Schultypen gibt es?',
+'6. Infos zum [Gesundheitssystem]: Haben alle Personen eine Krankenversicherung?']],
+['ÜB 9a · S. 130','Streichen Sie das falsche Relativpronomen durch: Wählen Sie das richtige.',[
+'(1) Meinen Nachbarn, {*der|den} im Urlaub meine Blumen gießt.',
+'(2) Die Verkäuferin beim Bäcker, {für die|*mit der} ich jeden Morgen kurz spreche.',
+'(3) Herrn Korkmaz, {*den|dem} ich täglich an der Haltestelle sehe, würde ich vermissen.',
+'(4) Frau Jannis, {der|*die} mit ihrem Hund unterwegs ist.',
+'(5) Moritz, {der|*den} ich schon lange kenne.',
+'(6) Freunde, {*mit denen|von denen} ich viel Spaß habe.',
+'(7) Leon, {der|*dem} eine Kneipe gleich um die Ecke gehört.',
+'(8) Menschen, {*die|denen} in meinem Leben wichtig sind.']],
+['ÜB 9b · S. 131','was oder wo? Ergänzen Sie das richtige Relativpronomen.',[
+'1. In Berlin kann man viel unternehmen, {*was|wo} super ist.',
+'2. Alles, {*was|wo} man zum Leben braucht, gibt es hier.',
+'3. Ich suche noch eine tolle Wohnung, {was|*wo} ich ein paar Jahre bleiben kann.',
+'4. Ich fand auch die Stadt gut, {was|*wo} meine Freunde und ich am Wochenende waren.',
+'5. Für meine Freunde gab es dort fast nichts, {*was|wo} ihnen gefallen hat.',
+'6. Das, {*was|wo} ich ihnen gezeigt habe, fanden sie langweilig.',
+'7. Wir haben ein paar Clubs gefunden und gefeiert, {*was|wo} sie super fanden.',
+'8. Den nächsten Ort, {was|*wo} wir ein Wochenende verbringen, sollen meine Freunde aussuchen.']],
+['ÜB 10a · S. 131','Auf Standpunkte eingehen. A dass für viele Leute etwas anderes viel wichtiger ist · B wie viele Leute ganz andere und größere Probleme haben? · C dass es noch zwei andere Aspekte gibt · D ein wichtiger Punkt fehlt noch · E das stimmt meiner Meinung nach nicht',[
+'1. Was Sie hier gesagt haben, {A|B|C|D|*E}',
+'2. Das ist bestimmt wichtig für Sie. Sie vergessen aber, {*A|B|C|D|E}',
+'3. Das sind zwar interessante Punkte, aber {A|B|C|*D|E}',
+'4. Das ist ein wichtiger Aspekt, ja. Wir dürfen aber nicht außer Acht lassen, {A|B|*C|D|E}',
+'5. Das ist ein Problem. Aber haben Sie auch daran gedacht, {A|*B|C|D|E}']],
+['ÜB 10b · S. 131','In Diskussionen vermitteln. Ergänzen Sie die Ausdrücke (ausreden · haben · recht haben · sagen · sehen · vorschlagen).',[
+'1. Ich glaube, du [siehst] nur eine Seite.',
+'2. Wichtig ist doch auch, was Eva gerade [gesagt hat].',
+'3. Hast du eine Idee? Welche Lösung [schlägst] du [vor]?',
+'4. Ich denke, dass ihr beide zum Teil [recht habt].',
+'5. Bitte, lass doch Felice auch mal [ausreden].',
+'6. Das verstehe ich noch nicht. [Hast] du dafür auch ein konkretes Beispiel?']],
+['ÜB 12a · S. 132','Was man am Wochenende in einer Stadt machen kann. Ordnen Sie die Verben zu.',[
+'1. ein Fahrrad {steigen|*mieten|schwimmen|schauen|haben|entspannen|*fahren|wandern}',
+'2. im Fluss {steigen|mieten|*schwimmen|schauen|haben|entspannen|fahren|wandern}',
+'3. auf den See {steigen|mieten|schwimmen|*schauen|haben|entspannen|fahren|wandern}',
+'4. auf einen Turm {*steigen|mieten|schwimmen|schauen|haben|entspannen|fahren|wandern}',
+'5. auf einen Berg {steigen|mieten|schwimmen|schauen|haben|entspannen|fahren|*wandern}',
+'6. einen guten Ausblick {steigen|mieten|schwimmen|schauen|*haben|entspannen|fahren|wandern}',
+'7. in einem Park {steigen|mieten|schwimmen|schauen|haben|*entspannen|fahren|wandern}',
+'8. mit dem Boot {steigen|mieten|schwimmen|schauen|haben|entspannen|*fahren|wandern}']],
+['ÜB 12c · S. 133','Hören Sie die fünf Texte (🔊 Computerstimme). Wählen Sie die richtige Lösung.',[
+'1. Kamal ist krank geworden. '+F,
+'2. Annabell möchte am liebsten … {*a in eine Ausstellung gehen|b einen anderen Kurs machen|c zu Hause bleiben}',
+'3. Sie hören Informationen über ein Kinderfest. '+F,
+'4. Man soll zu dem Fest … {a zu Fuß kommen|b mit dem Auto kommen|*c mit dem Bus kommen}',
+'5. Das Wetter wird zum Wochenanfang wärmer. '+F,
+'6. Vorausgesagt werden sonnige Tage im … {a Westen|b Norden|*c Süden}',
+'7. Sie hören Informationen zu einer Veranstaltung. '+F,
+'8. Im Stadtzentrum Köln gibt es Stau wegen … {a eines Unfalls|b einer Baustelle|*c des Berufsverkehrs}',
+'9. Wegen des Wetters gibt es Flugänderungen. '+R,
+'10. Der Flug nach Genf … {a ist pünktlich|*b hat Verspätung|c fällt aus}'],'',T12],
+['ÜB 13a · S. 133','Mit welchen Adjektiven kann man eine Stadt beschreiben? Schreiben Sie das ganze Wort.',[
+'1. h _ k t _ s _ h [hektisch]','2. m _ d _ _ n [modern]','3. i n t _ r _ _ s a _ t [interessant]','4. s a _ b _ _ [sauber]',
+'5. r _ _ s _ g [riesig]','6. t e _ _ r [teuer]','7. l _ _ t [laut]','8. a t _ r _ _ t i v [attraktiv]']],
+['ÜB 13c · S. 134','E-Mail an einen Geschäftspartner. Ergänzen Sie die Formulierungen.',[
+'(1) [Sehr geehrte] Frau Lundin, bald findet unser großes Jahrestreffen statt. (2) [Hoffentlich haben Sie Lust bekommen], Sie und Ihr Team kennenzulernen. Der erste Nachmittag ist frei. (3) [Gerne zeigen] meine Kollegen und ich Ihnen dann die wichtigsten Sehenswürdigkeiten. Auch ein Spaziergang am Rhein (4) [wäre sehr schön]. (5) [Danach würden wir gerne] mit Ihrem Team ein traditionelles Restaurant besuchen. (6) [Wir freuen uns darauf], unsere Stadt kennenzulernen. (7) [Mit freundlichen Grüßen] Lars Thoeme'],
+'Danach würden wir gerne | Gerne zeigen | Hoffentlich haben Sie Lust bekommen | Mit freundlichen Grüßen | Sehr geehrte | Wir freuen uns darauf, | wäre sehr schön'],
+['ÜB Wortbildung · S. 134','Was ist richtig? Wählen Sie das passende Wort mit -einander.',[
+'1. Mara und ihre Eltern sehen sich selten, aber sie denken oft {übereinander|*aneinander}.',
+'2. Meine Freundin und ich lachen oft, wir haben viel Spaß {voneinander|*miteinander}.',
+'3. Unser Team ist super. Wir lernen viel {*voneinander|beieinander}.',
+'4. Meine Großeltern führen eine gute Beziehung. Sie sind {untereinander|*füreinander} da.',
+'5. Meine Freundin und ich wohnen nicht weit {*auseinander|ineinander}.']]
+];
 
-  <header>
-    <div class="header-inner">
-      <div class="logo">
-        <span class="logo-icon" aria-hidden="true">N</span>
-        Netzwerk neu
-      </div>
-      <h1>Содержание упражнений</h1>
-      <p class="subtitle">Дополнительные упражнения к учебнику <strong>Netzwerk neu</strong> (Klett). Уровни A1–B2 · по 12 капитулов в каждом.</p>
-      <nav class="level-nav" aria-label="Быстрый переход к уровню">
-        <a class="level-pill a1" href="#a1">A1</a>
-        <a class="level-pill a2" href="#a2">A2</a>
-        <a class="level-pill b1" href="#b1">B1</a>
-        <a class="level-pill b2" href="#b2">B2</a>
-      </nav>
-    </div>
-  </header>
+const Q=(t,o,k)=>t+' {'+o.split('|').map((x,i)=>([].concat(k).includes(i)?'*':'')+x).join('|')+'}';
+const L=(t,k,o='ABCDEFG')=>Q(t,[...o].join('|'),[...k].map(x=>o.indexOf(x)));
+const CK=(t,y)=>'<<'+(y?'+':'-')+'>>'+t;
+const T29=['Hm, das wichtigste in einer Gesellschaft? Ich glaube, für mich ist das Meinungsfreiheit, also, dass alle sagen dürfen, was sie denken. Aber natürlich nur, was nicht gegen die Würde von anderen Menschen verstößt oder respektlos ist. Ja, und damit eine Demokratie funktioniert, müssen die Menschen mitbestimmen können, zum Beispiel durch Wahlen. Außerdem finde ich sehr wichtig, dass man reisen kann, wohin man will. Mein Opa zum Beispiel hat in der DDR gelebt und erzählt immer, dass er nie nach Italien oder Spanien reisen konnte. Das finde ich schlimm. Auf diese Freiheit will ich nicht verzichten.',
+'Hm, das ist eine schwierige Frage, vieles ist wichtig. Aber ich glaube, ich finde Sicherheit am wichtigsten. Ich möchte mich frei bewegen können und will keine Angst haben, nachts nach Hause zu gehen. Ich könnte nicht in einer Stadt leben, wo es sehr viel Kriminalität gibt. Sicherheit kann aber auch bedeuten, dass man einen einigermaßen sicheren Arbeitsplatz hat. Das finde ich auch wichtig.',
+'Na ja, ich denke, Hilfsbereitschaft ist sehr wichtig. Viele Leute kümmern sich nur um sich selbst und merken gar nicht, dass andere vielleicht Hilfe brauchen. Oder sie wollen nicht helfen. Aber das ist doch nicht in Ordnung. Wenn ich einen Unfall habe oder in einer gefährlichen Situation bin, dann hoffe ich, dass mir jemand hilft. Wenn es in der Schule Ärger gibt zwischen Schülern, versuche ich immer zu helfen.'];
+const T6a=['Hallo und herzlich willkommen zur „Diskussion aktuell“. Wir reden heute über das Thema „Ehrenamtliche Hilfe für Schülerinnen und Schüler“ und dazu sind zwei Gäste bei mir im Studio, nämlich Gregor Saalfeld, Vorsitzender des Vereins „Schülerpaten“, und eine Schülerpatin, die Studentin Julia Hofer. Herr Saalfeld, könnten Sie kurz schildern, was Ihr Verein genau macht? – Gern. Wir organisieren und vermitteln Schülerpaten, also ehrenamtliche Mitarbeiter und Mitarbeiterinnen, die Kindern und Jugendlichen bei Lernproblemen in der Schule helfen. – Und Frau Hofer ist so eine Patin. – Genau, ich bin seit zwei Jahren Schülerpatin. Ich kenne das Programm aus eigener Erfahrung, denn ich hatte früher selbst einen Paten, der mir sehr geholfen hat. Und damit bin ich nicht alleine. – Wer kann denn Schülerpate oder -patin werden, Herr Saalfeld? Und wie funktioniert das? – Prinzipiell erstmal jeder, der Zeit und Lust hat und außerdem gern mit Jugendlichen arbeitet. – Ja, und nachdem man sich beworben hat, besucht man einen Kurs und bekommt Tipps für die praktische Arbeit. Das fand ich sehr spannend und hilfreich. – Frau Hofer, erzählen Sie uns doch kurz von Ihrer konkreten Arbeit: Wie viele Schüler betreuen Sie, wie oft arbeiten Sie zusammen? – Also, weil ich im Moment nicht so viel Zeit habe, habe ich nur ein „Patenkind“. Wir treffen uns normalerweise einmal in der Woche, vor Prüfungen oder bei Problemen verabreden wir uns aber auch öfter. – Das bedeutet also, dass jeder Pate und jede Patin die Zeiten für die Treffen mit den Schülerinnen und Schülern selbst bestimmen kann. Das ist sicherlich gut so. – Ja, das ist wichtig. Genauso ist es auch wichtig, dass unsere Helferinnen und Helfer entscheiden können, worüber sie bei den Treffen sprechen. Oft geht es da eben nicht nur um ein bestimmtes Lernthema, sondern auch um allgemeinere Fragen oder auch Strategien zum Thema Lernen generell. – Genau. Wichtig ist ja, dass Pate und Schüler gut miteinander klarkommen und sich kennenlernen. Man muss ja erst mal die Stärken und Schwächen des Schülers oder der Schülerin kennenlernen, um dann ein sinnvolles Lernprogramm erarbeiten und genau auf die Bedürfnisse eingehen zu können. – Spielt es denn eine Rolle, was die Schülerinnen und Schüler später beruflich machen wollen, Herr Saalfeld? – Aber natürlich, bei den Älteren noch mehr als bei den Jüngeren. Da sich unsere Patinnen und Paten ganz individuell mit ihren Schützlingen beschäftigen, können und sollen sie ja das berücksichtigen, was jeder Einzelne braucht. – Ja genau. Da kann ich gleich ein Beispiel erzählen. Mein Schüler möchte im Frühling ein Praktikum machen und das bereiten wir auch schon vor, so richtig mit Bewerbungstraining und so. – Als ich mich auf die Sendung vorbereitet habe, habe ich auch über viele Patenschaften gelesen, die nach dem Ende der Schulzeit noch weitergehen. Würden Sie sagen, das ist eher eine Ausnahme oder eher typisch? – Das kann ich nicht so beurteilen, denn das ist nicht mehr Teil unserer Arbeit. Wir freuen uns natürlich, wenn das so ist, denn das bedeutet ja für uns, dass unsere Arbeit erfolgreich war. – So ein längerer persönlicher Kontakt ist sicher schön, aber für mich steht die Hilfe bei Problemen in der Schule im Vordergrund. – Wichtig ist dabei sicher auch, dass wir ja kein Geld dafür verlangen. Die Arbeit wird von Ehrenamtlichen gemacht und der Verein bekommt Spenden. – Vielen Dank an Sie beide. Jetzt machen wir eine kurze Pause und danach sprechen wir weiter.'];
+const T18=['Arbeitest du heute am Vormittag oder am Nachmittag?','Liest du Mails lieber auf dem Laptop oder auf dem Handy?','Ist das ein großes Projekt oder ein kleines?','Soll ich den Kunden anrufen oder ihm schreiben?'];
+const T19=['Ich bin eigentlich Abteilungsleiter in einer großen Computerfirma, aber in meiner Freizeit engagiere ich mich ehrenamtlich, und zwar bin ich Präsident des Sportvereins in meiner Stadt. Früher habe ich selbst Jugendliche trainiert, aber jetzt bin ich seit zwei Jahren Präsident und habe dafür keine Zeit mehr. Sport war schon immer mein Hobby und deshalb bin ich auch im Sportverein tätig. Jeder soll das machen, was er besonders gut kann.',
+'Ich bin mit 10 Jahren von Polen nach Deutschland gezogen und spreche beide Sprachen fließend. Aber viele Polen kommen ohne große Deutschkenntnisse hierher und brauchen bei den Ämtern, den Banken und so weiter Hilfe. Beim Verein „International“ bin ich als Übersetzerin für Polnisch tätig. Ich helfe anderen gern und das kann ich mit meinen Sprachkenntnissen am besten.',
+'Mein Engagement im Nachbarschaftsverein begann eigentlich damit, dass ich eine alte Nachbarin hatte. Für die habe ich oft Sachen erledigt, bin einkaufen gegangen oder habe mich um ihren Garten gekümmert. Eine gute Atmosphäre in der Nachbarschaft ist mir wichtig, und dafür kann ich mich im Nachbarschaftsverein engagieren.'];
+const WORDS10='die Gerechtigkeit | die Freiheit | die Zivilcourage | die Gesundheit | die Fairness | die Demokratie | die Rücksicht | die Bildung | die Sicherheit | der Respekt | die Ehrlichkeit | die Hilfsbereitschaft | die Gleichberechtigung | die gute Erziehung';
+const E10=[
+{c:10,l:'KB 1a · S. 42',i:'Werte in der Gesellschaft. Wählen Sie zwei bis drei Begriffe, erklären Sie sie und geben Sie je ein Beispiel.',b:WORDS10,o:1,t:['Begriff 1: Erklärung und Beispiel','Begriff 2: Erklärung und Beispiel','Begriff 3: Erklärung und Beispiel'],m:'Gerechtigkeit: ein Verhalten, das jedem die gleichen Rechte gibt. · Freiheit: die Möglichkeit, sich frei zu bewegen und zu handeln, solange man die Freiheit der anderen nicht einschränkt. · Gesundheit: Zustand, wenn es einem körperlich und seelisch gutgeht. · Sicherheit: Zustand, der frei von Gefahr ist. · Ehrlichkeit: wenn die Wahrheit gesagt wird. · Hilfsbereitschaft: wenn man Menschen und Tieren aus eigener Initiative hilft. · Gleichberechtigung: wenn Männer und Frauen die gleichen Rechte haben. · Gute Erziehung: wenn Kinder von ihren Eltern lernen, wie man sich in der Gesellschaft verhalten sollte.'},
+{c:10,l:'KB 1b · S. 42',i:'Ordnen Sie die Begriffe aus 1a den Fotos A–G zu (Lösungsmuster: mehrere Zuordnungen sind möglich; hier zählt jede passende).',t:[L('die Gerechtigkeit','C'),L('die Freiheit','AE'),L('die Zivilcourage','G'),L('die Gesundheit','BG'),L('die Fairness','CE'),L('die Demokratie','AC'),L('die Rücksicht','BEG'),L('die Bildung','F'),L('die Sicherheit','CE'),L('der Respekt','DEF'),L('die Ehrlichkeit','D'),L('die Hilfsbereitschaft','EG'),L('die Gleichberechtigung','BEF'),L('die gute Erziehung','DF')]},
+{c:10,l:'KB 2a · S. 43',i:'Hören Sie (🔊 Track 2.29). Welche Werte finden die Personen besonders wichtig? Kreuzen Sie an.',x:T29,t:['Person 1: '+CK('Meinungsfreiheit',1)+CK('Mitbestimmung',1)+CK('Reisefreiheit',1)+CK('Sicherheit')+CK('Hilfsbereitschaft'),'Person 2: '+CK('Meinungsfreiheit')+CK('Mitbestimmung')+CK('Reisefreiheit')+CK('Sicherheit',1)+CK('Hilfsbereitschaft'),'Person 3: '+CK('Meinungsfreiheit')+CK('Mitbestimmung')+CK('Reisefreiheit')+CK('Sicherheit')+CK('Hilfsbereitschaft',1)]},
+{c:10,l:'KB 2b · S. 43',i:'Hören Sie noch einmal. Welche Gründe/Beispiele nennen die Personen? Ergänzen Sie Ihre Notizen.',o:1,t:['Person 1','Person 2','Person 3'],m:'Person 1: Wahlen, damit eine Demokratie funktioniert; Reisefreiheit – Großvater hat in der DDR gelebt und konnte nicht reisen; darauf will sie/er nicht verzichten. · Person 2: möchte sich frei bewegen können und keine Angst haben, nachts nach Hause zu gehen; auch ein sicherer Arbeitsplatz ist wichtig. · Person 3: man soll sich gegenseitig helfen, denn man will auch, dass jemand hilft, wenn einem selbst etwas passiert; hilft, wenn es zwischen Schülern Ärger gibt.'},
+{c:10,l:'KB 2c · S. 43',i:'Welche Werte finden Sie für das Leben in einer Gesellschaft am wichtigsten? Begründen Sie.',o:1,t:['Für mich ist … am wichtigsten, denn …']},
+{c:10,l:'KB 3a · S. 44',i:'Soziales Engagement. Sehen Sie die Fotos in 3b an. Für wen oder wofür setzen sich die Leute ein? Was machen sie?',o:1,t:['Foto 1 (Feuerwehr)','Foto 2 (Tafel)','Foto 3 (Patenschaft)'],m:'Foto 1: drei Feuerwehrleute in Uniformen mit Helmen und Schlauch üben, wie man ein Feuer löscht. · Foto 2: zwei Personen geben Essen aus, Kisten mit Brötchen; eine Person mit Papiertüte hat Essen bekommen. · Foto 3: ein älterer Mann und ein kleiner Junge sitzen am Tisch, der Mann hilft dem Jungen bei den Hausaufgaben.'},
+{c:10,l:'KB 3b · S. 44',i:'Lesen Sie Ihren Text (A, B oder C, Kursbuch S. 44) und notieren Sie: Was machen die Helfer? Wem/wann helfen sie? Welche Informationen/Zahlen gibt es?',o:1,t:['A Freiwillige Feuerwehr','B Die Tafel','C Patenschaften'],m:'A: löschen Feuer, helfen bei Unfällen und Hochwasser; zu jeder Tages- und Nachtzeit; engagieren sich auf dem Land und in kleineren Städten, Jugendgruppen, Ausbildung in Erster Hilfe, ergänzen die Berufsfeuerwehr. · B: verteilen Essen; 1,6 Millionen Menschen, 30 % Kinder und Jugendliche; sammeln noch gute Lebensmittel; über 60.000 Ehrenamtliche; in Berlin 45 Ausgabestellen und die erste Tafel Deutschlands. · C: helfen bei Behördengängen, Wohnungs- und Arbeitssuche und Hausaufgaben; Familien mit Mühe im Alltag, normalerweise 1× pro Woche; manchmal entstehen Freundschaften, Begleitung über Jahre; Kontakte vermitteln viele Organisationen.'},
+{c:10,l:'KB 3c · S. 44',i:'Welche Organisation aus 3b gefällt Ihnen am besten? Wo würden Sie selbst gern mithelfen? Begründen Sie (Redemittel „eine Auswahl treffen“).',o:1,t:['Ich würde gerne bei … mithelfen, weil …']},
+{c:10,l:'KB 4a · S. 45',i:'Aktiv und Passiv. Ergänzen Sie die Passivsätze aus dem Text B.',t:['1. Supermärkte werfen Lebensmittel weg. → [Von Supermärkten werden Lebensmittel weggeworfen/Lebensmittel werden von Supermärkten weggeworfen]','2. Firmen spenden viele Lebensmittel. → [Viele Lebensmittel werden von Firmen gespendet/Von Firmen werden viele Lebensmittel gespendet]','3. 60.000 Helfer/innen unterstützen die Organisation. → [Die Organisation wird von 60.000 Helfer/innen unterstützt/Die Organisation wird von 60.000 Helfern unterstützt]']},
+{c:10,l:'KB 4b · S. 45',i:'Gibt es in Ihrer Sprache Passivformen? Wie bildet man sie?',o:1,t:['Meine Sprache: …']},
+{c:10,l:'KB 4c · S. 45',i:'Ein Tag bei der Tafel. Formulieren Sie Sätze im Passiv. (1. Der Tagesablauf wird morgens geplant.)',t:['2. Lebensmittel abholen – am Vormittag: [Am Vormittag werden die Lebensmittel abgeholt/Die Lebensmittel werden am Vormittag abgeholt]','3. mittags – Lebensmittel verteilen: [Mittags werden die Lebensmittel verteilt/Die Lebensmittel werden mittags verteilt]','4. danach – Anfragen beantworten und Anrufer/innen zurückrufen: [Danach werden Anfragen beantwortet und Anrufer/innen zurückgerufen]','5. nachmittags – Rechnungen prüfen und bezahlen: [Nachmittags werden Rechnungen geprüft und bezahlt/Rechnungen werden nachmittags geprüft und bezahlt]']},
+{c:10,l:'KB 5a · S. 45',i:'Passiv in der Vergangenheit. Ergänzen Sie die Regel (Text: „Die erste deutsche Tafel wurde 1993 in Berlin gegründet …“).',t:['Präteritum: [wurde] + Partizip II','Perfekt: sein + Partizip II + [worden]']},
+{c:10,l:'KB 5b · S. 45',i:'Bei der freiwilligen Feuerwehr. Schreiben Sie Passivsätze im Präteritum.',t:['1. ein Feuer melden → [Ein Feuer wurde gemeldet]','2. die Feuerwehrleute alarmieren → [Die Feuerwehrleute wurden alarmiert]','3. die Bewohner/innen retten → [Die Bewohner/innen wurden gerettet/Die Bewohner wurden gerettet]','4. den Brand löschen → [Der Brand wurde gelöscht]']},
+{c:10,l:'KB 6 · S. 45',i:'Welche sozialen Projekte gibt es bei Ihnen? Recherchieren Sie ein Projekt und schreiben Sie einen kurzen Text wie in 3b.',o:1,t:['Mein Projekt: …']},
+{c:10,l:'KB 7a · S. 46',i:'Wie funktioniert eine Stadt? Wer macht was? Schreiben Sie Sätze mit den Wörtern aus dem Kasten (Müllabfuhr, Polizei, Fundbüro, Behörde, Regierung, Bürgermeister, Feuerwehr, Einwohnermeldeamt, Post, Stadtinformation …).',o:1,t:['Satz 1','Satz 2','Satz 3'],m:'Die Polizei schützt die Bürger/-innen. · Im Fundbüro kann man sich nach verlorenen Dingen erkundigen. · Die Behörde/Das Amt genehmigt Anträge. · Die Regierung beschließt Gesetze. · Der/Die Bürgermeister/-in kümmert sich darum, dass eine Stadt gut funktioniert. · Die Feuerwehr ist zuständig, wenn es brennt, bei Unfällen und bei Hochwasser. · Beim Einwohnermeldeamt muss man sich an- oder abmelden. · Die Post ist zuständig für das Verschicken von Briefen und Paketen. · Bei der Stadtinformation kann man sich über Veranstaltungen informieren.'},
+{c:10,l:'KB 7b · S. 46',i:'Lesen Sie den Artikel „Soziales Zusammenleben lernen“ (S. 46) und erklären Sie in zwei bis drei Sätzen, was Mini-München ist.',o:1,t:['Mini-München ist …'],m:'„Mini-München“ ist ein Projekt für Kinder und Jugendliche, bei dem diese lernen können, was man in einer Stadt alles machen muss und kann. Dazu wird alle zwei Jahre eine Spielstadt in einer Halle aufgebaut und nur von Kindern und Jugendlichen organisiert.'},
+{c:10,l:'KB 7c · S. 47',i:'Welche Aussagen sind richtig? Kreuzen Sie an (nach dem Lösungsschlüssel: 1 und 6).',t:[CK('1. Mini-München ist ein Spiel, in dem Kinder eine Stadt organisieren.',1),CK('2. Mini-München wird von den Eltern der Kinder mitorganisiert und betreut.'),CK('3. Mini-München ist ein Programm, das die Stadt München von anderen Städten übernommen hat.'),CK('4. In Mini-München arbeiten die Kinder in unterschiedlichen Betrieben.'),CK('5. In Mini-München schreiben die Organisatoren/Organisatorinnen eine Zeitung und einen Weblog.'),CK('6. In Mini-München entscheiden die Bürger und Bürgerinnen über wichtige Projekte.',1)]},
+{c:10,l:'KB 7d · S. 47',i:'Hören Sie (Track 2.30). Was finden die Eltern gut? Notieren Sie Stichpunkte.',o:1,t:['– Kinder haben Spaß, lernen …'],m:'Kinder fühlen sich dort wohl, stehen dafür gern morgens auf, haben Spaß, lernen viel (z. B. dass man Geld erarbeiten muss, dass es Pflichten gibt, dass man Arbeit ernst nehmen muss, konsequent sein muss), können kreativ sein und gemeinsam etwas entwickeln, im Labor Versuche machen, Neues entdecken (unter anderen Umständen als in der Schule).'},
+{c:10,l:'KB 7e · S. 47',i:'Was ist nötig, damit eine Stadt funktioniert? Einigen Sie sich auf die sieben wichtigsten Punkte.',o:1,t:['Am wichtigsten ist, dass …']},
+{c:10,l:'KB 8a · S. 47',i:'Passiv mit Modalverb. Ergänzen Sie die Sätze (Zeilen 5–16 des Artikels).',t:['1. In einer Stadt [muss] so viel [erledigt werden].','2. Zuerst [muss] Geld [eingenommen werden].','3. Das Projekt [kann] alle zwei Jahre [durchgeführt werden].']},
+{c:10,l:'KB 8b · S. 47',i:'Was muss hier alles gemacht werden? Bilden Sie Sätze mit muss/müssen + Partizip II + werden.',t:['das Geschirr abräumen: Das Geschirr [muss abgeräumt werden].','den Müll wegwerfen: Der Müll [muss weggeworfen werden].','die Straßenlampe reparieren: Die Straßenlampe [muss repariert werden].','die Lieferung in den Keller bringen: Die Lieferung [muss in den Keller gebracht werden].','die Blumen gießen: Die Blumen [müssen gegossen werden].','die Fenster putzen: Die Fenster [müssen geputzt werden].']},
+{c:10,l:'KB 9a · S. 47',i:'Kontrastakzente in Fragen mit oder. Schreiben Sie die zwei Kontrastwörter (Beispiel 1: interessant – uninteressant).',x:['Finden Sie das Projekt Mini-München interessant oder uninteressant?','Möchten Sie mehr über das Projekt erfahren oder haben Sie genug Informationen bekommen?','Hätten Sie als Kind gern bei Mini-München mitgemacht oder lieber nicht?'],t:['2. Möchten Sie mehr über das Projekt erfahren oder haben Sie genug Informationen bekommen? [mehr] – [genug]','3. Hätten Sie als Kind gern bei Mini-München mitgemacht oder lieber nicht? [gern] – [nicht]']},
+{c:10,l:'KB 9b · S. 47',i:'Lesen Sie die Sätze laut und markieren Sie die Kontrastwörter.',t:['1. Willst du den Text morgen oder nächste Woche schreiben? [morgen] – [nächste Woche]','2. Hast du dich schon für ein Projekt entschieden oder überlegst du noch? [entschieden] – [überlegst]','3. Bist du gern dabei oder musst du mitmachen? [gern] – [musst]']},
+{c:10,l:'KB 10a · S. 48',i:'Was fällt Ihnen zu Europa und zur Europäischen Union (EU) ein? Sammeln Sie.',o:1,t:['Stichwörter: …']},
+{c:10,l:'KB 10b · S. 48',i:'Lesen Sie den Text „Geschichte der Europäischen Union“ (S. 48). Notizen: Wer? Was? Wann? Warum?',o:1,t:['Notizen'],m:'Politiker in Europa: wollten besser zusammenarbeiten, um den Frieden zu schützen (nach dem 2. Weltkrieg) – wer eng zusammenarbeitet, führt keinen Krieg. · Sechs Staaten: gründeten die Europäische Gemeinschaft (1951); Vertrag von Maastricht (1992). · Immer mehr Staaten: treten der EU bei (seit 1992). · Bürger/-innen: reisen ohne Grenzkontrollen (seit 1995), studieren und arbeiten in anderen EU-Staaten, kaufen Waren und Dienstleistungen. · Immer mehr Länder: benutzen den Euro (seit 2002). · Skeptiker/-innen: haben Angst, dass nationale Besonderheiten verschwinden, zu viele Vorschriften, zu viel Zeit für Entscheidungen. · Großbritannien: Ausstieg aus der EU (seit Anfang 2020).'},
+{c:10,l:'KB 11a · S. 48',i:'Hören Sie die Präsentation über die EU (Track 2.34) und ordnen Sie zu. A um Wirtschaftsbeziehungen und den Umgang mit Atomkraft zu regeln · B am 7. Februar, geschlossen · C die Würde des Menschen und die Menschenrechte, Demokratie, Freiheit, Toleranz und Solidarität · D Krieg in Europa zu vermeiden · E um die Produktion von Kriegswaffen zu kontrollieren.',t:[L('1. 1951 unterschrieben einige Länder einen Vertrag,','E','ABCDE'),L('2. Die Länder Belgien, Deutschland, Frankreich, Italien, Luxemburg und die Niederlande hatten das Ziel,','D','ABCDE'),L('3. Zwei weitere Verträge wurden 1957 unterzeichnet,','A','ABCDE'),L('4. Der Vertrag von Maastricht wurde im Jahr 1992,','B','ABCDE'),L('5. Für die Mitgliedsstaaten sind die wichtigsten Werte','C','ABCDE')]},
+{c:10,l:'KB 11b · S. 49',i:'Hören Sie noch einmal. Was hat Ihnen an der Präsentation gut gefallen? Sammeln Sie weitere Tipps für Präsentationen.',o:1,t:['Das hat mir gefallen: …','Weitere Tipps: …']},
+{c:10,l:'KB 11c · S. 49',i:'Wie sollte eine Präsentation aufgebaut sein? Ordnen Sie zu.',t:[Q('die wichtigsten Punkte zusammenfassen','Einleitung|Hauptteil|Schluss',2),Q('Beispiele nennen','Einleitung|Hauptteil|Schluss',1),Q('Vor- und Nachteile nennen','Einleitung|Hauptteil|Schluss',1),Q('Informationen zum Thema geben','Einleitung|Hauptteil|Schluss',1),Q('sich bedanken','Einleitung|Hauptteil|Schluss',2),Q('über eigene Erfahrungen sprechen','Einleitung|Hauptteil|Schluss',1),Q('das Thema vorstellen','Einleitung|Hauptteil|Schluss',0),Q('die eigene Meinung sagen','Einleitung|Hauptteil|Schluss',1),Q('Inhalt und Struktur der Präsentation erklären','Einleitung|Hauptteil|Schluss',0)]},
+{c:10,l:'KB 12a · S. 49',i:'Wählen Sie ein Thema (Praktikum im Ausland, Sprachen in der EU, Reisen in Europa, Freiwilliges Engagement, Wählen mit 16 Jahren, Traditionen in Europa …) und machen Sie Notizen.',o:1,t:['Einleitung','Hauptteil','Schluss']},
+{c:10,l:'KB 12b–d · S. 49',i:'Üben Sie Ihre Präsentation laut (Partner/in gibt Feedback), halten Sie sie im Kurs und sprechen Sie darüber, welche Tipps aus 11b geholfen haben.',o:1,t:['Feedback von meinem Partner / meiner Partnerin','Das hat mir geholfen / das will ich beim nächsten Mal beachten']},
+{c:10,l:'KB 13a · S. 50',i:'In welchen Situationen kann ein Dolmetscher / eine Dolmetscherin helfen? Was könnte interkulturelles Dolmetschen sein?',o:1,t:['Situationen: …','Interkulturelles Dolmetschen ist vielleicht …']},
+{c:10,l:'KB 13b · S. 50',i:'Beim Arzt (Szene 26, Video). Notieren Sie Informationen zu den Fragen der Personen.',o:1,t:['Güneren Aksoy (Fragen 1–3)','Dr. Peter Flubacher (Fragen 4–6)'],m:'Aksoy: 1. seit 1998; 2. Dolmetsch-Einsatz in einer Arztpraxis, sie soll dem Arzt helfen, die Diagnose zu übermitteln; 3. sie muss kulturelle Aspekte einbeziehen, z. B. wenn ein Patient sich durch Redewendungen ausdrückt, deren Bedeutung sie erklären muss. · Flubacher: 4. sprachliche Kommunikation mit ausländischen Patienten war ein Problem, er will für sie ein guter Arzt sein; 5. sie ist die Brücke zwischen Arzt und Patient/-in; 6. er hat Vorurteile abgebaut, versteht Patienten besser; man ist ein anderer Mensch, wenn man die eigene Sprache spricht.'},
+{c:10,l:'KB 13c · S. 50',i:'Was lernt man in der Ausbildung zum Übersetzenden? Markieren Sie.',t:[CK('sprachliche Techniken',1),CK('Strategien'),CK('Verhalten in angespannten Situationen',1),CK('Grammatik'),CK('Informationen über das Bildungs-, Sozial- und Gesundheitswesen',1),CK('Erkennen von Situationen, in denen man kulturell vermitteln muss',1),CK('kulturelle Unterschiede'),CK('Aussprache')]},
+{c:10,l:'KB 14 · S. 50',i:'Die interkulturelle Vermittlerin (Szene 27). Ergänzen Sie Informationen zu Zainab Lüscher (Mindmap).',o:1,t:['Kindheit und Schulzeit','Sprache und Kultur','Beruf','Privatleben'],m:'Kindheit und Schulzeit: im Irak aufgewachsen und zur Schule gegangen, mit Schweizer Mutter Deutsch, mit irakischem Vater und dem Umfeld Arabisch gesprochen, mit 17 in die Schweiz zurückgekehrt, Schule und Ausbildung in der Schweiz. · Sprache und Kultur: Deutsch, Arabisch. · Beruf: seit 20 Jahren Dolmetscherin. · Privatleben: dreifache Mutter, fühlt sich in der Schweiz zu Hause, befreundet mit einem Polizisten.'},
+{c:10,l:'KB 15 · S. 50',i:'Unterwegs mit Frau Lüscher (Szene 28). Ergänzen Sie die Aussagen und erklären Sie den Unterschied zwischen Dolmetschen und interkulturellem Vermitteln.',o:1,t:['1. Frau Lüscher fährt zuerst zu …','2. Dann fährt sie …','3. Am ersten Ort soll sie …','4. Bei der Familie ist sie, weil …','Dolmetschen / interkulturelles Vermitteln'],m:'1. … einem Elterngespräch in einer Primarschule; 2. … zu einer syrischen Familie; 3. … dolmetschen, da die Eltern Migranten sind und beide kein Deutsch sprechen; 4. … weil sie interkulturell vermitteln soll. · Dolmetschen: bei Gesprächen von einer Sprache in die andere übersetzen, wenn Personen sich sprachlich nicht verstehen können. · Interkulturelles Vermitteln: allgemein dafür sorgen, dass zwei Kulturen miteinander kommunizieren können (z. B. bei Korrespondenz helfen, zu Behörden begleiten, die fremde Kultur näherbringen, Frustsituationen bewältigen).'}
+];
 
-  <main id="main">
-    <section class="howto" aria-labelledby="howto-title">
-      <h2 id="howto-title">Как пользоваться</h2>
-      <p>Страница содержит ссылки на упражнения по каждому капитулу учебника <strong>Netzwerk neu</strong>.</p>
-      <ul>
-        <li>Все ссылки ведут на локальные файлы вида <code>A1/kapitel1.html</code>, <code>A2/kapitel3.html</code> и т.д.</li>
-        <li>Рекомендуется проходить капитулы последовательно в рамках уровня.</li>
-        <li>После выполнения упражнений можно вернуться на эту страницу через кнопку «Содержание» на страницах капитулов.</li>
-      </ul>
-    </section>
+const FD='Fisch und Fleisch|Milchprodukte|Süßes|Obst und Gemüse|Gebäck|Würzen & Co.';
+const E10U=[
+{c:10,l:'ÜB 1a · S. 114',i:'Werte in der Gesellschaft. Wie heißen die Wörter?',b:'die Bildung | die Demokratie | die Fairness | der Respekt | die Rücksicht | die Zivilcourage',t:['1. [Fairness] – die gerechte Behandlung von anderen, ohne Tricks','2. [Respekt] – andere achten, obwohl sie andere Meinungen haben','3. [Rücksicht] – bei dem, was man tut, an die Gefühle von anderen denken','4. [Demokratie] – eine politische Staatsform, in der die Bürger/innen frei wählen','5. [Bildung] – Wissen und Können, das man auf verschiedenen Wegen gelernt hat','6. [Zivilcourage] – Mut, das zu sagen und für das zu kämpfen, was man für richtig hält']},
+{c:10,l:'ÜB 1b · S. 114',i:'Notieren Sie ein passendes Adjektiv (1. rücksichtsvoll / rücksichtslos).',t:['2. die Fairness: [fair/unfair/gerecht/ungerecht]','3. der Respekt: [respektvoll/respektlos]','4. die Demokratie: [demokratisch/undemokratisch]']},
+{c:10,l:'ÜB 1c · S. 114',i:'Lesen Sie den Text „Die Politik muss für alle da sein“ (S. 114). Welche Ausdrücke haben die gleiche Bedeutung? 1 Rathaus · 2 Kandidatin · 3 blind · 4 Menschen mit körperlicher Behinderung · 5 Gehörlose · 6 Migrantinnen und Migranten · 7 Integration · 8 Regierung',t:[L('A Aufnahme in eine Gesellschaft','7','12345678'),L('B Personen, die ihr Land verlassen haben, um in einem anderen Land zu leben','6','12345678'),L('C Arbeitsort des Bürgermeisters / der Bürgermeisterin','1','12345678'),L('D Personen, die sich nicht vollständig bewegen können','4','12345678'),L('E Personen, die nicht hören können','5','12345678'),L('F in Deutschland: Bundeskanzler/in und alle Minister/innen','8','12345678'),L('G nicht sehen können','3','12345678'),L('H Bewerberin für ein Amt oder für eine Arbeitsstelle','2','12345678')]},
+{c:10,l:'ÜB 2a · S. 115',i:'Lesen Sie Jakobs Mail an Antonia (S. 115). Richtig oder falsch?',t:['1. Jakob wusste von Anfang an, dass Robert blind ist. '+F,'2. Robert und Jakob kennen sich aus der Arbeit. '+F,'3. Jakob lernt nützliche Dinge von Robert. '+R,'4. Jakob kann schon einige Buchstaben in Blindenschrift lesen. '+F,'5. Jakob hatte am Anfang Probleme, ohne Licht zu Hause herumzugehen. '+R,'6. Jakob denkt, dass Robert und Antonia Freunde werden können. '+R]},
+{c:10,l:'ÜB 2b · S. 115',i:'Wie heißen die Wörter? Ordnen Sie die Buchstaben.',t:['1. Für mich ist (1) MEIHUNGSFRINEITE: [Meinungsfreiheit] sehr wichtig, ich will sagen können, was ich denke!','2. In einer Stadt mit viel (2) RIKMÄLINITAT: [Kriminalität] möchte ich nicht so gern leben.','3. … dann hoffe ich auf die (3) HIFBERSEIFSCHALTT: [Hilfsbereitschaft] der anderen.']},
+{c:10,l:'ÜB 3a · S. 116',i:'Lesen Sie die Texte im Kursbuch (3b) noch einmal und beantworten Sie die Fragen 1–9 (A Feuerwehr, B Tafel, C Patenschaften).',o:1,t:['A 1. Wo ist die Freiwillige Feuerwehr besonders aktiv? 2. Welche Ausbildung erhalten die Ehrenamtlichen? 3. In welchen Fällen hilft die Feuerwehr?','B 4. Woher bekommt die Tafel Lebensmittel? 5. Wo können sich bedürftige Menschen Lebensmittel abholen? 6. Wie viele Menschen helfen bei der Tafel?','C 7. Wie helfen Paten/Patinnen den Familien? 8. Wie oft finden die Treffen statt? 9. Wie finden die Paten/Patinnen Familien?'],m:'1. Besonders auf dem Land und in kleinen Städten. 2. Eine Ausbildung in Erster Hilfe, sie lernen viel rund um das Thema Feuer. 3. Wenn es brennt, bei Unfällen und Hochwasser. 4. Von Supermärkten und Kantinen. 5. Bei Ausgabestellen. 6. 60.000 ehrenamtliche Helfer und Helferinnen. 7. Bei Behördengängen, bei der Wohnungs- und Arbeitssuche, bei Hausaufgaben der Kinder. 8. Einmal pro Woche. 9. Über Organisationen wie z. B. biffy Berlin.'},
+{c:10,l:'ÜB 3b · S. 116',i:'Was würden Sie gern tun und warum? Schreiben Sie Begründungen (Ausdrücke aus KB 3c).',o:1,t:['1. vielen Menschen helfen – bei der Tafel mitarbeiten','2. mit Kindern lernen – als Pate/Patin tätig sein','3. im Notfall helfen – Geld an die Feuerwehr spenden','4. Kinder individuell unterstützen – bei einer Hilfsorganisation mitmachen','5. in einem Verein tätig sein – sich engagieren für andere'],m:'1. Ich würde gern vielen Menschen helfen, darum möchte ich bei der Tafel mitarbeiten. 2. … 3. Geld an die Feuerwehr zu spenden spricht mich am meisten an, da die Feuerwehr im Notfall hilft. 4. Ich könnte mir auch vorstellen, Kinder individuell zu unterstützen, darum will ich bei der Hilfsorganisation biffy Berlin mitmachen. 5. Ich würde gern in einem Verein tätig sein, da ich mich für andere engagieren möchte.'},
+{c:10,l:'ÜB 3c · S. 116',i:'Wo finden Sie im Supermarkt welche Lebensmittel? Ordnen Sie zu.',t:[Q('die Aprikose',FD,3),Q('die Butter / die Margarine',FD,1),Q('die Zwetschge / die Pflaume',FD,3),Q('die Vollmilch',FD,1),Q('das Gewürz',FD,5),Q('der Quark',FD,1),Q('der/das Ketchup',FD,5),Q('die Orange / die Apfelsine',FD,3),Q('die Konfitüre / die Marmelade',FD,2),Q('der Pudding',FD,[1,2]),Q('das Hühnchen',FD,0),Q('das Hörnchen / das Croissant',FD,4),Q('die Schlagsahne',FD,1),Q('die Soße',FD,5),Q('das Hackfleisch',FD,0)]},
+{c:10,l:'ÜB 3d · S. 116',i:'Welche Lebensmittel würden Sie zu einem günstigeren Preis kaufen, wenn sie seit zwei Tagen abgelaufen sind oder nicht mehr frisch aussehen? Vergleichen Sie.',o:1,t:['Ich würde … kaufen, weil …']},
+{c:10,l:'ÜB 4a · S. 117',i:'Bilden Sie das Partizip II und ordnen Sie zu: regelmäßig oder unregelmäßig?',t:[Q('1. liefern → [geliefert]','regelmäßig|unregelmäßig',0),Q('2. bestellen → [bestellt]','regelmäßig|unregelmäßig',0),Q('3. einladen → [eingeladen]','regelmäßig|unregelmäßig',1),Q('4. essen → [gegessen]','regelmäßig|unregelmäßig',1),Q('5. informieren → [informiert]','regelmäßig|unregelmäßig',0),Q('6. kaufen → [gekauft]','regelmäßig|unregelmäßig',0),Q('7. wegwerfen → [weggeworfen]','regelmäßig|unregelmäßig',1),Q('8. sammeln → [gesammelt]','regelmäßig|unregelmäßig',0),Q('9. spenden → [gespendet]','regelmäßig|unregelmäßig',0),Q('10. mitnehmen → [mitgenommen]','regelmäßig|unregelmäßig',1),Q('11. empfangen → [empfangen]','regelmäßig|unregelmäßig',1),Q('12. kontrollieren → [kontrolliert]','regelmäßig|unregelmäßig',0)]},
+{c:10,l:'ÜB 4b · S. 117',i:'Der Weg der Tomate. Ordnen Sie die Bilder A–E den Sätzen zu.',t:[L('1. Das Gemüse wird bestellt.','D','ABCDE'),L('2. Dann wird das Gemüse in den Supermarkt gebracht.','A','ABCDE'),L('3. Im Supermarkt wird das meiste Gemüse gekauft.','E','ABCDE'),L('4. Lebensmittel, die niemand gekauft hat, werden der Tafel gespendet.','B','ABCDE'),L('5. Die Lebensmittel werden von der Tafel verteilt.','C','ABCDE')]},
+{c:10,l:'ÜB 4c · S. 117',i:'Schreiben Sie zu den Aktivsätzen den entsprechenden Passivsatz aus 4b.',t:['2. Ein Lkw bringt dann das Gemüse in den Supermarkt. → [Dann wird das Gemüse in den Supermarkt gebracht/Das Gemüse wird in den Supermarkt gebracht]','3. Die Kunden kaufen das meiste Gemüse im Supermarkt. → [Im Supermarkt wird das meiste Gemüse gekauft/Das meiste Gemüse wird im Supermarkt gekauft]','4. Der Supermarkt spendet der Tafel Lebensmittel, die niemand gekauft hat. → [Lebensmittel, die niemand gekauft hat, werden der Tafel gespendet]','5. Die Tafel verteilt die Lebensmittel. → [Die Lebensmittel werden von der Tafel verteilt/Die Lebensmittel werden verteilt]']},
+{c:10,l:'ÜB 4d · S. 118',i:'Bei der Feuerwehr. Ergänzen Sie die Verben im Passiv (alarmieren, ausbilden, feiern, kontrollieren, reinigen, üben). Beispiel (1): werden … kontrolliert.',t:['(2) [wird] jedes Mitglied gut [ausgebildet]','(3) die Einsätze [werden] mit dem Team immer wieder [geübt]','(4) [werden] die Feuerwehrleute blitzschnell [alarmiert]','(5) [werden] die Uniformen für den nächsten Einsatz [gereinigt]','(6) [werden] auch Feste [gefeiert]']},
+{c:10,l:'ÜB 4e · S. 118',i:'„Tag der offenen Tür“ bei der Feuerwehr. Was wird gemacht? Formulieren Sie Sätze im Passiv (1. Zuerst wird das Programm geplant.)',t:['2. Helfer/innen informieren: [Dann werden die Helferinnen und Helfer informiert]','3. Plakate drucken und aufhängen: [Plakate werden gedruckt und aufgehängt]','4. Informationen posten: [Die Informationen werden auch online gepostet]','5. Bürgermeisterin einladen: [Die Bürgermeisterin wird eingeladen]','6. Spiele für Kinder vorbereiten: [Anschließend werden Spiele für die Kinder vorbereitet]','7. Feuerwehrautos putzen: [Dann werden die Feuerwehrautos geputzt]','8. Vorführungen üben: [Die Vorführungen werden geübt]','9. Gäste empfangen und herumführen: [Schließlich werden die Gäste empfangen und herumgeführt]']},
+{c:10,l:'ÜB 5a · S. 118',i:'Passiv in der Vergangenheit. Welche Form ist richtig?',t:['Unser Verein „Nachbarschaftshilfe“ (1) {wird|*wurde|wurden} 2009 gegründet. Seitdem sind verschiedene Projekte umgesetzt (2) {werden|wurden|*worden}, wie zum Beispiel der Tauschclub. 2013 (3) {werden|*wurde|wurden} mit Ihren Spenden der Kinderspielplatz an der Bahnhofstraße gebaut und 2017 (4) {wird|wurde|*wurden} fünfzig Bäume im Park gepflanzt. Auf dem Weihnachtsmarkt im letzten Jahr (5) {werden|*wurde|wurden} Geld für eine Kletterwand gesammelt.']},
+{c:10,l:'ÜB 5b · S. 118',i:'Feierabend im Verein. Vergleichen Sie die Bilder A und B und schreiben Sie sieben Passivsätze im Präteritum zu Bild B (ausschalten, gießen, abspülen, trinken, stellen, schließen, wegräumen, ziehen).',o:1,t:['1. Der Computer wurde ausgeschaltet.','2.','3.','4.','5.','6.','7.','8.'],m:'Der Computer wurde ausgeschaltet. · Die Pflanze wurde gegossen. · Das benutzte Geschirr wurde abgespült. · Der Kaffee wurde getrunken. · Die Bücher wurden ins Regal gestellt. · Das Fenster wurde geschlossen. · Die Stifte wurden weggeräumt. · Der Stecker vom Computer wurde gezogen.'},
+{c:10,l:'ÜB 6a · S. 119',i:'Hören Sie die Diskussion (🔊 Track 2.17). Wer sagt was? a = Moderatorin, b = Gregor Saalfeld, c = Julia Hofer.',x:T6a,t:[L('1. Manche Schüler und Schülerinnen werden später selbst Schülerpate oder -patin.','c','abc'),L('2. Alle Schülerpaten und -patinnen bekommen eine Einführung in die Arbeit.','c','abc'),L('3. Die Patinnen und Paten organisieren die Termine für die Treffen.','a','abc'),L('4. Paten/Patinnen unterstützen beim Lernen allgemein.','b','abc'),L('5. Damit man jemanden gut unterstützen kann, sollte man ihn oder sie gut kennen.','c','abc'),L('6. Bei Bedarf bereiten die Patinnen und Paten auch auf die Arbeitswelt vor.','c','abc'),L('7. Oft hält der Kontakt auch noch, wenn die Schulzeit für beide vorbei ist.','a','abc'),L('8. Die Hilfe ist kostenlos.','b','abc')]},
+{c:10,l:'ÜB 6b · S. 119',i:'Ich kann helfen. A) Ergänzen Sie die Antwortmail an Herrn Masch (Lösungsmuster).',t:['Sehr [geehrter] Herr Masch, ich habe Ihre [Anzeige] gelesen und kann Ihnen sehr gerne [helfen].','Ich kann z. B. [montags] und donnerstags am [Nachmittag] für Sie einkaufen gehen und Ihnen dann alles [vorbeibringen].','Ich [freue] mich über eine Nachricht von Ihnen. [Rufen] Sie mich gerne an. Mit [freundlichen] Grüßen']},
+{c:10,l:'ÜB 6b-B · S. 119',i:'B) Antworten Sie auf die Anzeige „Pate/Patin gesucht“ (S. 119).',o:1,t:['Ihre Antwort']},
+{c:10,l:'ÜB 7a · S. 119',i:'Rund um die Stadt. Finden Sie die sieben Nomen in der Buchstabenschlange (Rathaus ist markiert) und schreiben Sie sie auf.',t:['1. [Rathaus]','2. [Bürgermeister]','3. [Steuer]','4. [Straße]','5. [Vorhaben]','6. [Gehalt]','7. [Gericht]']},
+{c:10,l:'ÜB 7a-Sätze · S. 119',i:'Schreiben Sie mit jedem Wort einen Satz.',o:1,t:['Rathaus','Bürgermeister','Steuer','Straße','Vorhaben','Gehalt','Gericht'],m:'1. Das Rathaus ist ab 8 Uhr geöffnet. 2. Der Bürgermeister ist Chef der Regierung. 3. Die Bürger und Bürgerinnen, die ein Einkommen haben, bezahlen Steuern. 4. Die Müllabfuhr sorgt dafür, dass die Straßen der Stadt immer sauber sind. 5. Der Stadtrat stimmt über wichtige Vorhaben ab. 6. Wer in der Stadt arbeitet, bekommt ein Gehalt. 7. In Mini-München gibt es auch ein Gericht.'},
+{c:10,l:'ÜB 7b · S. 120',i:'Was gehört zusammen? A von denen Steuern abgezogen werden · B in den Ferien ein Programm für Kinder und Jugendliche von 7 bis 15 Jahren · C die von den Bürgerinnen und Bürgern von Mini-München gewählt wird · D wie eine Stadt organisiert wird · E findet es alle zwei Jahre statt · F und die Kinder bekommen das Geld bei der Bank.',t:[L('1. Die Stadt München finanziert','B','ABCDEF'),L('2. Weil das Projekt so beliebt ist,','E','ABCDEF'),L('3. Die Teilnehmenden lernen,','D','ABCDEF'),L('4. Für die Arbeit bekommen die Kinder Gehälter,','A','ABCDEF'),L('5. Das Gehalt wird in der Währung MiMü bezahlt','F','ABCDEF'),L('6. Es gibt auch eine politische Vertretung,','C','ABCDEF')]},
+{c:10,l:'ÜB 7c · S. 120',i:'Wird eine Meinung ausgedrückt oder ein Widerspruch? Sortieren Sie.',t:[Q('1. Da kann ich dir nicht voll zustimmen, weil du nur an die jungen Leute denkst.','Meinung|Widerspruch',1),Q('2. Ich bin überzeugt, dass Sicherheit sehr wichtig ist.','Meinung|Widerspruch',0),Q('3. Meiner Meinung nach ist es notwendig, dass neue Schulen gebaut werden.','Meinung|Widerspruch',0),Q('4. Das sehe ich völlig anders als du.','Meinung|Widerspruch',1),Q('5. Du betonst, dass Schulen so wichtig sind. Ich denke, dass du in diesem Punkt nicht recht hast.','Meinung|Widerspruch',1),Q('6. Ich finde es auch sehr sinnvoll, dass die Stadt für gute öffentliche Verkehrsmittel sorgt.','Meinung|Widerspruch',0),Q('7. Für mich zählt besonders, dass Straßen und öffentliche Plätze sauber sind.','Meinung|Widerspruch',0),Q('8. Ich stehe auf dem Standpunkt, dass interessante Kulturangebote besonders wichtig sind.','Meinung|Widerspruch',0),Q('9. Du findest es am wichtigsten, dass es überall in der Stadt sauber ist. Da bin ich nicht deiner Ansicht.','Meinung|Widerspruch',1),Q('10. Du sagst, dass mehr Kulturangebote notwendig sind. Da muss ich dir leider widersprechen.','Meinung|Widerspruch',1),Q('11. Findest du nicht auch, dass tolle Kulturangebote viel wichtiger sind als eine Sporthalle?','Meinung|Widerspruch',0)]},
+{c:10,l:'ÜB 8a · S. 120',i:'Passiv mit Modalverb. Was muss in einer Stadt gemacht werden? (1. müssen gewählt werden)',t:['2. Damit die Stadt Einnahmen hat, [müssen Steuern gezahlt werden]. (Steuern zahlen)','3. In den Ämtern der Stadt [muss vieles organisiert werden]. (vieles organisieren)','4. Jede Woche [muss der Müll entsorgt werden]. (den Müll entsorgen)','5. Für die Sicherheit [müssen die Straßen kontrolliert werden]. (Straßen kontrollieren)','6. In der Stadtvertretung [müssen viele Entscheidungen getroffen werden]. (viele Entscheidungen treffen)']},
+{c:10,l:'ÜB 8b · S. 120',i:'Arbeitsbeginn im Bürgerbüro. Was muss alles gemacht werden? (1. Der Computer muss hochgefahren werden.)',t:['2. Mails checken: Die Mails [müssen gecheckt werden].','3. Anträge genehmigen: (Die) Anträge [müssen genehmigt werden].','4. Dokumente unterschreiben: (Die) Dokumente [müssen unterschrieben werden].','5. den Termin mit der Kollegin verschieben: Der Termin mit der Kollegin [muss verschoben werden].','6. Formulare ausdrucken: (Die) Formulare [müssen ausgedruckt werden].']},
+{c:10,l:'ÜB 9 · S. 121',i:'Satzmelodie. Hören Sie (🔊 Track 2.18) und ergänzen Sie die Wörter.',x:T18,t:['1. Arbeitest du heute am [Vormittag] oder am [Nachmittag]?','2. Liest du Mails lieber auf dem [Laptop] oder auf dem [Handy]?','3. Ist das ein [großes] Projekt oder ein [kleines]?','4. Soll ich den Kunden [anrufen] oder ihm [schreiben]?']},
+{c:10,l:'ÜB 10 · S. 121',i:'Die EU. Ergänzen Sie die Sätze.',b:'Bürgerinnen und Bürger | Kritik | Land | Staaten | Vertrag | Währung',t:['1. 1951 gründeten Politiker aus sechs [Staaten] die Europäische Gemeinschaft.','2. 1992 entstand mit dem [Vertrag] von Maastricht die EU.','3. Heute können die [Bürgerinnen und Bürger] aus EU-Staaten in der Regel ohne Grenzkontrollen reisen.','4. Es ist auch problemlos möglich, in einem anderen [Land] zu leben und zu studieren.','5. Seit 2002 verwenden viele Länder dieselbe [Währung], den Euro.','6. Die EU-Politik muss viele Kompromisse machen. Es gibt immer wieder Diskussionen und [Kritik] an der EU und ihren Gesetzen.']},
+{c:10,l:'ÜB 11 · S. 121',i:'Aus der Geschichte der EU. Ordnen Sie die Verben zu.',b:'benutzen | beschließen | führen | gründen | reisen | schützen | unterschreiben | zusammenleben',t:['1. engere Zusammenarbeit [beschließen]','2. die Europäische Union [gründen]','3. einen Vertrag [unterschreiben]','4. keine Kriege [führen]','5. in Frieden [zusammenleben]','6. die Menschenrechte [schützen]','7. dieselbe Währung [benutzen]','8. ohne Grenzkontrollen [reisen]']},
+{c:10,l:'ÜB 12a · S. 121',i:'Höflich Kritik üben. Was ist positiver?',t:[Q('1. Die Präsentation hat …','a mir gut gefallen, sie war sehr interessant.|b ein paar interessante Punkte gehabt.',0),Q('2. Das ist ein spannendes Thema, …','a aber ich habe viele Punkte schon gekannt.|b manche Informationen waren neu für mich.',1),Q('3. Deine/Ihre Präsentation wäre noch besser, …','a wenn man dich/Sie besser verstanden hätte.|b wenn du/Sie lauter gesprochen hättest/hätten.',1),Q('4. In deiner/Ihrer Präsentation hast du / haben Sie …','a passende Beispiele und Bilder ausgewählt.|b auch Bilder und Beispiele gezeigt.',0)]},
+{c:10,l:'ÜB 12b · S. 121',i:'Fragen zu einer Präsentation einleiten. Schreiben Sie vollständige Sätze (1. eine Frage / zu / Ihr Thema / haben / Ich / noch).',t:['1. [Ich habe noch eine Frage zu Ihrem Thema]','2. Ein Punkt / interessiert mich / Ihrer Präsentation / besonders: [Ein Punkt Ihrer Präsentation interessiert mich besonders]','3. ich / möchten / Zu Ihrem letzten Punkt / fragen / noch etwas: [Zu Ihrem letzten Punkt möchte ich noch etwas fragen]','4. Ich / nicht wissen, / ob / ich / haben / richtig verstanden / das: [Ich weiß nicht, ob ich das richtig verstanden habe]']},
+{c:10,l:'ÜB 12c–d · S. 122',i:'Präsentation „Politik lernen, aber wie? – Politik als Schulfach?“ oder „Ich bin dann mal weg! – Studienjahr im Ausland“: Notieren Sie zu den fünf Folien Ihre Ideen; halten Sie die Präsentation vor Ihrem Partner und geben Sie Feedback.',o:1,t:['Folie 1: Thema, Inhalt und Struktur','Folie 2: Meine persönlichen Erfahrungen','Folie 3: In meinem Heimatland','Folie 4: Vor- und Nachteile & Meine Meinung','Folie 5: Abschluss & Dank']},
+{c:10,l:'ÜB Wortbildung A · S. 122',i:'Adjektive mit -bar. Ergänzen Sie.',b:'erreichbar | haltbar | machbar | recycelbar',t:['1. Das ist kein großes Problem, das ist gut [machbar].','2. Viele Lebensmittel sind sehr lange [haltbar].','3. Mein Arbeitsplatz ist auch zu Fuß [erreichbar].','4. Das Material ist zu 100 Prozent [recycelbar].']},
+{c:10,l:'ÜB Wortbildung B · S. 122',i:'Adjektive mit -los. Bilden Sie Adjektive aus den Nomen (1. hilflos).',t:['2. Sie haben keine Kosten, die Reparatur ist [kostenlos].','3. Er hat schon lange keine Arbeit mehr, er ist [arbeitslos].','4. Das geht ohne Probleme, wir können das schnell und [problemlos] reparieren.']},
+{c:10,l:'ÜB R1 · S. 123',i:'Ehrenamtliche erzählen (🔊 Track 2.19). Für welche Organisation engagieren sich die Personen? Warum?',x:T19,t:[Q('1. Carsten Weber – Organisation:','Sportverein|Verein „International“|Nachbarschaftsverein',0)+' '+Q('Warum?','Sport ist sein Hobby|hilft gern anderen|findet gute Nachbarschaft wichtig',0),Q('2. Anita Nowak – Organisation:','Sportverein|Verein „International“|Nachbarschaftsverein',1)+' '+Q('Warum?','Sport ist sein Hobby|hilft gern anderen|findet gute Nachbarschaft wichtig',1),Q('3. Michael Turk – Organisation:','Sportverein|Verein „International“|Nachbarschaftsverein',2)+' '+Q('Warum?','Sport ist sein Hobby|hilft gern anderen|findet gute Nachbarschaft wichtig',2)]},
+{c:10,l:'ÜB R2 · S. 123',i:'Wo möchten Sie lieber mitarbeiten? Wählen Sie „Lernhilfe für Schülerinnen und Schüler“ oder „Umwelt reinigen“ und begründen Sie.',o:1,t:['Ich möchte lieber bei … mitarbeiten, weil …']},
+{c:10,l:'ÜB R3 · S. 123',i:'Sehen Sie die Bilder A und B an. Beschreiben Sie, was sich verändert hat (Passiv).',o:1,t:['Auf Bild B wurde …'],m:'Die Blumen wurden in die Vase gestellt. · Die Decke wurde über den Stuhl gehängt. · Das Geschirr wurde abgespült und weggeräumt. · Die Gläser wurden gespült und in den Schrank gestellt. · Der Vorhang wurde geöffnet. · Die Schuhe wurden aufgeräumt.'},
+{c:10,l:'ÜB Wortfamilie · S. 125',i:'Was ist wichtig für eine Gemeinschaft? Ergänzen Sie je ein Wort aus der Wortfamilie.',t:['ehrlich – [die Ehrlichkeit]','gerecht – [die Gerechtigkeit]','aufnehmen – [die Aufnahme]','tolerant – [die Toleranz]','fair – [die Fairness]','organisieren – [die Organisation]']}
+];
 
-    <!-- A1 -->
-    <section class="course a1" id="a1" aria-labelledby="a1-title">
-      <div class="course-header">
-        <div class="course-badge a1" aria-hidden="true">A1</div>
-        <div class="course-meta">
-          <h2 class="course-title" id="a1-title">A1 · Netzwerk neu</h2>
-          <p class="course-desc">Первый контакт с языком. Приветствия, знакомство, город, еда, повседневная жизнь, работа, квартира, покупки и отпуск.</p>
-          <div class="course-stats">
-            <span class="stat">12 Kapitel</span>
-            <span class="stat">Start Deutsch 1</span>
-          </div>
-        </div>
-      </div>
-      <ol class="chapters">
-        <li class="chapter"><a href="A1/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Guten Tag!</div><div class="ch-topics">Приветствие, представление, алфавит, числа, страны и языки</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Freunde, Kollegen und ich</div><div class="ch-topics">Хобби, друзья, коллеги, дни недели, времена года</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">In Hamburg</div><div class="ch-topics">Город, ориентирование, достопримечательности, вопросы о пути</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Guten Appetit!</div><div class="ch-topics">Еда и напитки, покупки, ресторан, приглашения</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Alltag und Familie</div><div class="ch-topics">Распорядок дня, время, семья, договорённости</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Zeit mit Freunden</div><div class="ch-topics">Свободное время, приглашения, планы</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Arbeitsalltag</div><div class="ch-topics">Работа, профессии, рабочий день</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Fit und gesund</div><div class="ch-topics">Здоровье, спорт, советы, императив</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Meine Wohnung</div><div class="ch-topics">Квартира, мебель, описание комнат</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Studium und Beruf</div><div class="ch-topics">Учёба, профессии, планы на будущее</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Die Jacke gefällt mir!</div><div class="ch-topics">Одежда, покупки, цвета, мнения</div></div></a></li>
-        <li class="chapter"><a href="A1/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Ab in den Urlaub!</div><div class="ch-topics">Отпуск, путешествия, погода, планы</div></div></a></li>
-      </ol>
-    </section>
+const BX='A Anrede|A Einleitung|A Schluss|A Gruß|B Anrede|B Einleitung|B Schluss|B Gruß';
+const E11N=[
+{c:11,l:'KB 1a · S. 52',i:'Sehen Sie die Fotos an. Welches finden Sie typisch für „Leben in der Stadt“? Welche Aspekte fehlen? Vergleichen und begründen Sie.',o:1,t:['Typisch finde ich Foto … , weil …','Es fehlt …']},
+{c:11,l:'KB 1b · S. 52',i:'Welche Wörter passen zu den Fotos A–F? (Lösungsmuster – mehrere Zuordnungen möglich.)',t:[L('das Hochhaus','ADF','ABCDEF'),L('der Verkehr','A','ABCDEF'),L('das Tempo','A','ABCDEF'),L('der Dreck / der Schmutz','A','ABCDEF'),L('der Lärm','A','ABCDEF'),L('die Mobilität','A','ABCDEF'),L('die Atmosphäre','BC','ABCDEF'),L('der Club','B','ABCDEF'),L('die Kneipe','B','ABCDEF'),L('das Konzert','B','ABCDEF'),L('die Erholung','C','ABCDEF'),L('die Aussicht','CF','ABCDEF'),L('der Bewohner / die Bewohnerin','D','ABCDEF'),L('die Lage','DF','ABCDEF'),L('der Nachbar / die Nachbarin','D','ABCDEF'),L('der Stadtteil / das Viertel','D','ABCDEF'),L('das Angebot','E','ABCDEF'),L('die Fußgängerzone','E','ABCDEF'),L('der Fußgänger / die Fußgängerin','E','ABCDEF'),L('das Schaufenster','E','ABCDEF'),L('der Laden / das Geschäft','E','ABCDEF'),L('das Unternehmen','F','ABCDEF'),L('das Bürogebäude','F','ABCDEF'),L('der Stress','F','ABCDEF')]},
+{c:11,l:'KB 2a · S. 53',i:'Stimmen aus Leipzig (Track 2.35). Worüber sprechen die Personen? Kreuzen Sie die Themen an.',t:['Person 1: '+CK('Wohnen',1)+CK('Arbeit',1)+CK('Freizeitangebot')+CK('Verkehr/Verkehrsmittel',1),'Person 2: '+CK('Wohnen',1)+CK('Arbeit',1)+CK('Freizeitangebot',1)+CK('Verkehr/Verkehrsmittel'),'Person 3: '+CK('Wohnen',1)+CK('Arbeit')+CK('Freizeitangebot',1)+CK('Verkehr/Verkehrsmittel',1)]},
+{c:11,l:'KB 2b · S. 53',i:'Hören Sie noch einmal. Notieren Sie wichtige Informationen zu einem Thema aus 2a und tauschen Sie sich aus.',o:1,t:['Thema Wohnen','Thema Arbeit','Thema Verkehr','Thema Freizeitangebot'],m:'Wohnen: Person 1 wohnt in einer Straße mit vielen alten Häusern; sein Haus ist noch nicht renoviert, hat keinen Aufzug, aber günstige Miete. Person 2 hat schnell und leicht eine billige Wohnung in einem tollen Viertel gefunden. Person 3 wohnt im Hochhaus im 11. Stock, ist zufrieden, schöner Blick, nette Nachbarn, die sich gegenseitig helfen. · Arbeit: Person 1 Fahrradkurier; Person 2 von der Firma nach Leipzig geschickt, Büro mitten in der Fußgängerzone. · Verkehr: Person 1 kennt die schnellsten Wege, braucht kein GPS/Navi; Person 3 erreicht alles gut mit öffentlichen Verkehrsmitteln, Motorrad für Ausflüge am Wochenende. · Freizeitangebot: Person 2: tolle Cafés, Kneipen, kleine Läden, große Musik- und Kunstszene, Konzerte, Clubs und Galerien auf ehemaligem Fabrikgelände; Person 3: Motorradtouren, schöne Seen, coole Billard-Kneipen.'},
+{c:11,l:'KB 3 · S. 53',i:'Welche Orte in einer Stadt sind wichtig für Sie? Was machen Sie dort?',o:1,t:['Ich finde … wichtig. Ich mag …']},
+{c:11,l:'KB 4a · S. 54',i:'In der Stadt oder auf dem Land leben? Diskutieren Sie über Vor- und Nachteile.',o:1,t:['Vorteile Stadt / Land','Nachteile Stadt / Land']},
+{c:11,l:'KB 4c · S. 54',i:'Lesen Sie die Regel und markieren Sie in 4b alle Artikelwörter, die als Pronomen verwendet werden. Welche haben eine andere Endung als der Artikel?',o:1,t:['Pronomen in 4b'],m:'welche (Pl., Akk.), einer (mask., Nom.), keiner (mask., Nom.), meins (Neutrum, Nom.), eine (fem., Akk.), keinen (mask., Akk.), keins (Neutrum, Akk.)'},
+{c:11,l:'KB 4d · S. 54',i:'Ergänzen Sie die Pronomen und lesen Sie die Gespräche laut.',b:'eine | einen | keine | keins | welche',t:['1. Gibt es hier in der Nähe eine Bank? – Tut mir leid, hier gibt es [keine].','2. Wo finde ich eine Post? – Gleich da drüben ist [eine].','3. In welchem Park kann man gut joggen? – Es gibt nur [einen], den Stadtgarten.','4. Gibt es hier im Viertel ein Schwimmbad? – Nein, hier gibt es leider [keins].','5. Wo gibt es Geschäfte für Sportsachen? – Im Zentrum gibt es natürlich [welche].']},
+{c:11,l:'KB 5 · S. 54',i:'Notieren Sie drei Fragen mit irgend- und fragen Sie im Kursraum.',o:1,t:['Frage 1','Frage 2','Frage 3']},
+{c:11,l:'KB 6a–b · S. 55',i:'Morgens um fünf. Wer arbeitet schon um diese Zeit? Lesen Sie den Magazinbericht (S. 55): Welche Personen machen was am frühen Morgen?',o:1,t:['Ferdy Ziegler','Vera / Bäckerei Bucher','Max / Bauhof','Obdachloser'],m:'Ferdy Ziegler arbeitet als Krankenpfleger und hat noch bis 7 Uhr Nachtdienst, er bereitet die Übergabe vor. Chef und Angestellte der Bäckerei Bucher arbeiten in der Backstube; Vera ist Fahrerin für die Bäckerei und fährt Backwaren zu den Kunden, sie lädt um 5 Uhr Körbe mit frischem Brot ins Auto, ein Auszubildender hilft ihr. Max ist Fahrer von einem Reinigungsfahrzeug im städtischen Bauhof und fährt um 5 Uhr los, um die Straßen zu reinigen. Ein Obdachloser sucht auf dem Bauhof einen Schlafplatz.'},
+{c:11,l:'KB 7 · S. 55',i:'Die erste Stunde Ihres Tages. Schreiben Sie einen kurzen Text und korrigieren Sie sich gegenseitig.',o:1,t:['Mein Text']},
+{c:11,l:'KB 8a–b · S. 56',i:'Was macht eine Stadt lebenswert? Sammeln Sie fünf Punkte, lesen Sie den Text „Was macht Städte attraktiv?“ (S. 56) und vergleichen Sie.',o:1,t:['Meine fünf Punkte','Diese Punkte stehen auch im Text']},
+{c:11,l:'KB 8c–d · S. 56',i:'Welche drei Städte liegen vorn? Hören Sie den Radiobericht (Track 2.36). Platz 1–3 (Barcelona, Berlin, Hamburg, Helsinki, München, Oslo, Paris, Stockholm, Vancouver, Zürich):',t:['1. Platz: [Helsinki]','2. Platz: [München]','3. Platz: [Oslo]']},
+{c:11,l:'KB 8e · S. 56',i:'Was sind die beliebtesten Städte in Ihrem Land? Berichten Sie.',o:1,t:['Beliebte Städte: …']},
+{c:11,l:'KB 9a · S. 56',i:'Hören Sie die vier Personen (Track 2.37). Wer sagt was? Kreuzen Sie an (mehrere Kreuze möglich).',t:['1. Dort, wo ich wohne, arbeitet man im Durchschnitt länger als in den anderen Städten. '+CK('München')+CK('Hamburg')+CK('Berlin')+CK('Zürich',1),'2. Die Stadt tut auch etwas für ärmere Menschen. '+CK('München')+CK('Hamburg',1)+CK('Berlin')+CK('Zürich'),'3. Ich lebe gerne in einer Stadt, wo der Arbeitstag nicht so früh beginnt. '+CK('München')+CK('Hamburg')+CK('Berlin',1)+CK('Zürich'),'4. Das, was eine Stadt im Ranking attraktiv macht, kann für die Menschen auch Nachteile bringen. '+CK('München',1)+CK('Hamburg',1)+CK('Berlin')+CK('Zürich',1),'5. Das Wetter ist nichts, was im Ranking gewertet wird. '+CK('München')+CK('Hamburg',1)+CK('Berlin')+CK('Zürich')]},
+{c:11,l:'KB 9b · S. 57',i:'Relativsätze mit was und wo. Worauf beziehen sich was und wo in den Aussagen 1–5 aus 9a?',t:[Q('1. Dort, wo ich wohne …','Dort|Durchschnitt|Städten',0),Q('2. … etwas für ärmere Menschen, was ich sehr wichtig finde','Die Stadt tut auch etwas für ärmere Menschen|Stadt|Menschen',0),Q('3. … in einer Stadt, wo der Arbeitstag nicht so früh beginnt','Stadt|Arbeitstag|ich',0),Q('4. Das, was eine Stadt im Ranking attraktiv macht …','Das|Ranking|Nachteile',0),Q('5. … nichts, was im Ranking gewertet wird','Wetter|nichts|Ranking',1)]},
+{c:11,l:'KB 9c · S. 57',i:'Ergänzen Sie was oder wo und setzen Sie die Sätze fort.',t:[Q('1. Ich finde alles interessant, …','was|wo',0),Q('2. Ich möchte in einer Stadt wohnen, …','was|wo',1),Q('3. In meiner Stadt gibt es nichts, …','was|wo',0),Q('4. Ein schöner Ort ist für mich, …','was|wo',1),Q('5. In … gibt es viele Plätze, …','was|wo',1),Q('6. Mir gefällt vieles nicht, …','was|wo',0)]},
+{c:11,l:'KB 9c-Fortsetzung · S. 57',i:'Setzen Sie die Sätze aus 9c fort.',o:1,t:['1. Ich finde alles interessant, was …','2. Ich möchte in einer Stadt wohnen, wo …','3. In meiner Stadt gibt es nichts, was …','4. Ein schöner Ort ist für mich, wo …','5. In … gibt es viele Plätze, wo …','6. Mir gefällt vieles nicht, was …'],m:'1. … was mit Kunst zu tun hat. 2. … wo ich viele Freunde habe. 3. … was ich nicht kenne. 4. … wo es viel Grün gibt. 5. … wo ich immer wieder hingehe. 6. … was die Politiker entscheiden.'},
+{c:11,l:'KB 10 · S. 57',i:'Unsere Stadt soll besser werden (Rollenspiel, Budget max. 20 Mio. €). Wählen Sie eine Rolle, notieren Sie Argumente und spielen Sie die Diskussion (Redemittel: auf Standpunkte eingehen / vermitteln).',o:1,t:['Meine Rolle und meine Projekte','Meine Argumente','Wie ich auf andere eingehe / vermittle']},
+{c:11,l:'KB 11a · S. 57',i:'Aussprache: Wo machen Sie Pausen? Tippen Sie auf ein Wort, um nach ihm eine Pause (|) zu markieren.',pm:'p',t:['Ich wohne in Köln, | mir gefällt die Stadt sehr gut. | Ich verstehe allerdings nicht, | warum sie in sämtlichen Rankings immer so weit hinten liegt. | Ich kann mir keine schönere Stadt vorstellen. | Warum gefällt es mir in Köln so gut? | Die Antwort ist ganz einfach: | Hier gibt es schöne Museen, | viele gute Theater und Kinos, | kleine Cafés, | den Rhein mit den vielen Schiffen | und und und. | Noch wichtiger ist, | dass hier meine Freunde wohnen. | Außerdem habe ich eine sehr gute Arbeitsstelle.']},
+{c:11,l:'KB 12a · S. 58',i:'Was wissen Sie über die Schweiz? Sammeln Sie im Kurs.',o:1,t:['Was ich über die Schweiz weiß']},
+{c:11,l:'KB 12b · S. 58',i:'Emmas Blog (S. 58). Welcher Abschnitt (A–D) passt zu welchem Foto 1–4?',t:[L('Foto 1','D','ABCD'),L('Foto 2','C','ABCD'),L('Foto 3','B','ABCD'),L('Foto 4','A','ABCD')]},
+{c:11,l:'KB 12c · S. 58',i:'Ergänzen Sie die Sätze mit Informationen aus 12b (Lösungsmuster).',t:['1. Emma besichtigt Zürich, [als wäre sie eine Touristin]','2. In der Altstadt [gibt es historische Gebäude]','3. Wenn man Zürich von oben sehen will, [sollte man mit der Bahn auf den Uetliberg fahren]','4. Zum Schwimmen [kann man an den Zürichsee oder an die Limmat gehen]','5. Wer sich für Kunst und Design interessiert, [fährt am besten nach Zürich-West]','6. Fahrräder [kann man bei „Züri rollt“ mieten]']},
+{c:11,l:'KB 12d · S. 58',i:'Ein Freund möchte nach Zürich reisen. Berichten Sie ihm, was Sie über die Stadt wissen.',o:1,t:['Mein Bericht']},
+{c:11,l:'KB 13a · S. 59',i:'Tourismus in Ihrer Stadt. Erstellen Sie eine Mindmap (Freizeitaktivitäten, Museen, Plätze, Restaurants/Cafés, Besonderheiten).',o:1,t:['Freizeitaktivitäten','Museen','Plätze','Restaurants/Cafés','Besonderheiten']},
+{c:11,l:'KB 13b · S. 59',i:'Welche Formulierungen passen zu wem? A = Brief an einen guten Freund, B = an einen Geschäftspartner (Sie).',t:[Q('1. bald kommen Sie zu uns nach …',BX,5),Q('2. Bis bald',BX,3),Q('3. Gerne zeigen meine Kollegen und ich Ihnen einige Sehenswürdigkeiten.',BX,5),Q('4. Hallo …,',BX,0),Q('5. Hoffentlich gefallen dir die Vorschläge.',BX,2),Q('6. Viele Grüße',BX,3),Q('7. Hoffentlich haben Sie Lust bekommen, die Stadt kennenzulernen.',BX,6),Q('8. Sehr geehrter Herr …,',BX,4),Q('9. ich freue mich sehr, dass du mich bald besuchen kommst.',BX,1),Q('10. Liebe …, / Lieber …,',BX,0),Q('11. Meine Kollegen und ich freuen uns schon darauf, Sie kennenzulernen.',BX,6),Q('12. Mit freundlichen Grüßen',BX,7),Q('13. Ich freue mich schon darauf, dir „meine Stadt“ zu zeigen.',BX,2),Q('14. Ich freue mich / Wir freuen uns, Sie bald hier zu begrüßen.',BX,7)]},
+{c:11,l:'KB 13c · S. 59',i:'Wählen Sie einen Empfänger aus 13b und schreiben Sie den Brief / die E-Mail (Anrede, Einleitung, Schluss, Gruß).',o:1,t:['Meine E-Mail']},
+{c:11,l:'KB 14a–c · S. 60',i:'Tübingen am Neckar (Szene 29): Was sehen Sie? Welchen Eindruck haben Sie? Warum begleitet der Neckar Hölderlin sein ganzes Leben lang?',o:1,t:['Was ich sehe / mein Eindruck','Warum begleitet der Neckar Hölderlin?'],m:'Lösungsmuster: einen Fluss, viel Natur, eine Brücke, historische Gebäude, Boote, wenig Menschen, Studentenwohnheim; Eindruck: ruhig, idyllisch, sehr alt, wirkt wie eine Kleinstadt. · Hölderlin ist in Lauffen am Neckar geboren, in Nürtingen am Neckar aufgewachsen, hat in Tübingen studiert und ist dort gestorben. Die letzten 36 Jahre lebte er in einem Turmzimmer mit Blick auf den Neckar.'},
+{c:11,l:'KB 14b · S. 60',i:'Hölderlins Gedicht: Zu welchen Teilen passen die Umschreibungen? A An deinem Ufer habe ich mich wohlgefühlt. B Ich kenne die Landschaft auf beiden Seiten des Flusses, wo viele wandern. C Ich bin im Tal des Flusses geboren.',t:[L('Zeile 1–2 („… Tälern wachte mein Herz mir auf zum Leben, ___“)','C','ABC'),L('Zeile 2 („… deine Wellen umspielten mich, ___“)','A','ABC'),L('Zeile 4 („… Wanderer kennen, ist keiner fremd mir ___“)','B','ABC')]},
+{c:11,l:'KB 15a · S. 60',i:'Die Universitätsstadt (Szene 30). Welche Aussagen sind richtig? Kreuzen Sie an.',t:[CK('1. Tübingen ist eine sehr alte und gleichzeitig sehr lebendige Stadt. Fast ein Drittel der Einwohner sind Studierende.',1),CK('2. Auf dem Rathaus sieht man nur Bilder von wichtigen Männern der Stadt.'),CK('3. Am höchsten Punkt der Stadt liegt das Schloss. Ein Teil gehört zur 1477 gegründeten Universität Tübingen.',1),CK('4. Der Mittelpunkt von Baden-Württemberg ist das Schloss.'),CK('5. In der Altstadt liegt auch der Botanische Garten.')]},
+{c:11,l:'KB 15b · S. 60',i:'Korrigieren Sie die falschen Aussagen aus 15a (2, 4, 5).',o:1,t:['2.','4.','5.'],m:'2. Man sieht auch drei antike Göttinnen an der Fassade: Justitia (Gerechtigkeit), Demeter (Landwirtschaft), Athene (Wissenschaft). 4. Der geografische Mittelpunkt von Baden-Württemberg befindet sich mitten in der Stadt. 5. Der Botanische Garten befindet sich auf der Neckarinsel.'},
+{c:11,l:'KB 16a · S. 60',i:'Wie gut kennen Sie Tübingen? Welches Foto ist aus Tübingen (A, B oder C)?',t:[L('Foto aus Tübingen:','C','ABC')]},
+{c:11,l:'KB 16b–d · S. 60',i:'Mit dem Stocherkahn fahren (Szene 31). Wie ist das Stocherkahnfahren nach Tübingen gekommen? Seit wann? Warum ist es kommunikativ und bequem? Was sieht man? Was gefällt Ihnen an Tübingen?',o:1,t:['16b','16c','16d'],m:'16b: Tübinger Studenten fanden in Cambridge und Oxford die Punts toll und haben die Idee nach Tübingen gebracht; seit den 1920er Jahren. 16c: 1. Man sitzt sich gegenüber, lehnt sich entspannt gegen die hohen Lehnen. 2. Häuser direkt am Neckar („Neckarfront“), Stiftskirche, Hölderlinturm, Bursa, Evangelisches Stift und Schloss Hohentübingen. 3. Universität, Uniklinik, Stocherkahnfahren.'}
+];
+const E11U=[
+{c:11,l:'ÜB 2b · S. 127',i:'Stadtleben – Was bedeutet das für Sie? Ergänzen Sie passende Wörter zu den Buchstaben von STADTLEBEN (Beispiel: STRESS).',o:1,t:['S T A D T L E B E N'],m:'Lösungsmuster: der Stress, das Theater, die Abgase, die Disko, die Tram, das Leben, einkaufen, der Balkon, essen gehen, die Nachbarn.'},
+{c:11,l:'ÜB 4b · S. 128',i:'Welche Artikelwörter als Pronomen haben Sie in 4a angekreuzt? Markieren Sie in der Tabelle.',o:1,t:['Meine Markierungen'],m:'der: einer/keiner/meiner (Nom.), einen/keinen/meinen (Akk.) · das: eins/keins/meins (Nom. und Akk.) · die: eine/keine/meine · Plural: welche/keine/meine.'},
+{c:11,l:'ÜB 8b · S. 130',i:'Wie lebenswert ist Ihre Stadt? Beantworten Sie die Fragen in einem kurzen Text (Grünflächen, Kulturangebot, Freizeit, Wohnungssuche, Verkehr, öffentliche Verkehrsmittel, Sicherheit).',o:1,t:['Mein Text']},
+{c:11,l:'ÜB 9c · S. 131',i:'Genauer gesagt … Schreiben Sie passende Relativsätze mit wo.',o:1,t:['1. Der Park, … , ist nicht sehr groß.','2. Das Café, … , ist im Zentrum.','3. Das Fitness-Studio, … , ist sehr teuer.','4. Der Stadtteil, … , ist sehr beliebt.','5. In der Straße, … , gibt es viele Baustellen.'],m:'1. wo ich immer jogge · 2. wo ich jeden Tag einen Espresso trinke · 3. wo ich regelmäßig trainiere · 4. wo ich wohne · 5. wo ich mein Auto parke'},
+{c:11,l:'ÜB 9d · S. 131',i:'Schreiben Sie zu zweit fünf Quiz-Fragen mit wo (Wie heißt die Stadt, wo der Eiffelturm steht?).',o:1,t:['Frage 1–5']},
+{c:11,l:'ÜB 11a · S. 132',i:'Ergänzen Sie die Kommas: Tippen Sie auf ein Wort, nach dem ein Komma steht.',pm:'c',t:['Mir gefällt Köln besonders gut, weil die Leute so nett sind.','Mein Freund studiert in Köln, deshalb bin ich oft dort.','Viele Menschen sagen, dass der Karneval in Köln besonders toll ist.','Es gibt viele Sehenswürdigkeiten wie den Rhein, die Altstadt, einige Kunstmuseen, das Schokoladenmuseum und natürlich den Dom. Der ist am bekanntesten.']},
+{c:11,l:'ÜB 11b · S. 132',i:'Ergänzen Sie Kommas und Punkte (zweimal tippen = Punkt) und korrigieren Sie die Satzanfänge.',pm:'cp',t:['Es gibt viele Städte wie Augsburg, Ulm, Freiburg oder Wiesbaden, in denen man gut leben kann. Diese und viele andere Städte kommen aber nie in Städterankings vor, weil sie einfach zu klein sind. In so einer Stadt lebe ich, seit ich mit dem Studium begonnen habe. Hier in Tübingen gibt es nicht so viele Sehenswürdigkeiten, aber das Leben ist angenehm, die Stadt ist gemütlich, die Leute sind ziemlich entspannt und es ist viel los, weil es so viele Studierende gibt.']},
+{c:11,l:'ÜB 12b · S. 132',i:'Ein Wochenende in Zürich planen. Wählen Sie vier Aktivitäten pro Tag (Wetter: Fr 12°, Sa 22°, So 18°) und verwenden Sie Ausdrücke aus 12a.',o:1,t:['Freitag','Samstag','Sonntag']},
+{c:11,l:'ÜB 13b · S. 133',i:'Suchen Sie für die Adjektive in 13a ein Gegenteil.',t:['1. hektisch – [gemütlich/ruhig]','2. modern – [alt]','3. interessant – [langweilig/uninteressant]','4. sauber – [schmutzig/dreckig]','5. riesig – [klein]','6. teuer – [billig/günstig]','7. laut – [ruhig/still/leise]','8. attraktiv – [unattraktiv]']},
+{c:11,l:'ÜB 13c · S. 134',i:'E-Mail an einen Geschäftspartner. Welche Formulierungen passen wo? (Danach würden wir gerne | Gerne zeigen | Hoffentlich haben Sie Lust bekommen | Mit freundlichen Grüßen | Sehr geehrte | Wir freuen uns darauf, | wäre sehr schön)',t:['(1) [Sehr geehrte] Frau Lundin, bald findet unser großes Jahrestreffen statt.','(2) [Wir freuen uns darauf], Sie und Ihr Team kennenzulernen. Der erste Nachmittag des Treffens ist frei.','(3) [Gerne zeigen] meine Kollegen und Kolleginnen und ich Ihnen dann die wichtigsten Sehenswürdigkeiten.','Auch ein Spaziergang am Rhein (4) [wäre sehr schön].','(5) [Danach würden wir gerne] mit Ihrem Team ein traditionelles Restaurant besuchen.','(6) [Hoffentlich haben Sie Lust bekommen], unsere Stadt kennenzulernen.','(7) [Mit freundlichen Grüßen] Lars Thoeme']},
+{c:11,l:'ÜB Wortbildung B · S. 134',i:'Ergänzen Sie die passende Form von -einander (Bilder: Teller, Schuhe, Kinder, Häuser).',t:['1. Die Teller stehen [nebeneinander].','2. Er stellt die Teller [aufeinander/übereinander].','3. Die Schuhe liegen [durcheinander] auf dem Boden.','4. Die Kinder spielen nicht allein, sondern [miteinander].','5. In der Altstadt sehen die Häuser eng [aneinander] aus.']},
+{c:11,l:'ÜB R1–R2 · S. 135',i:'Sprechen Sie über die Fragen R1 (Vorteile Stadtleben, Land, Kursort, später leben) und ergänzen Sie die Sätze R2.',o:1,t:['R1: Meine Antworten','R2.1 Ich finde alles langweilig, was …','R2.2 Ich möchte an einem Ort leben, wo …','R2.3 Man findet immer etwas, was …','R2.4 Mir gefallen Städte, wo …'],m:'R2 Lösungsmuster: 1. … ich schon kenne. 2. … ich nette Nachbarn habe. 3. … Spaß macht. 4. … die Architektur modern ist.'},
+{c:11,l:'ÜB R3 · S. 135',i:'Wählen Sie eine E-Mail (A von Andy oder B von Luisa Friedrichsen) und schreiben Sie eine Antwort.',o:1,t:['Meine Antwort']},
+{c:11,l:'ÜB Wortfamilie · S. 137',i:'Ergänzen Sie möglichst viele Wörter, die Arbeit enthalten.',o:1,t:['Wörter mit Arbeit …'],m:'arbeitslos, arbeiten, weiterarbeiten, zusammenarbeiten, der/die Arbeiter/in, der/die Arbeitgeber/in, der/die Arbeitnehmer/in, der Arbeitsplatz, die Arbeitsstelle, der Arbeitstag, die Arbeitszeit, die Arbeitslosigkeit, der/die Mitarbeiter/in, die Handarbeit, die Hausarbeit, die Gruppenarbeit, die Zusammenarbeit'}
+];
 
-    <!-- A2 -->
-    <section class="course a2" id="a2" aria-labelledby="a2-title">
-      <div class="course-header">
-        <div class="course-badge a2" aria-hidden="true">A2</div>
-        <div class="course-meta">
-          <h2 class="course-title" id="a2-title">A2 · Netzwerk neu</h2>
-          <p class="course-desc">Расширение тем: прошлое, школа, медиа, чувства, городская жизнь, мобильность, спорт, совместная жизнь и развлечения.</p>
-          <div class="course-stats">
-            <span class="stat">12 Kapitel</span>
-            <span class="stat">Goethe-Zertifikat A2 / telc A2</span>
-          </div>
-        </div>
-      </div>
-      <ol class="chapters">
-        <li class="chapter"><a href="A2/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Und was machst du?</div><div class="ch-topics">Знакомство, рассказ о прошлом, договорённости</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Nach der Schulzeit</div><div class="ch-topics">Школа, воспоминания, жизненные пути</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">Immer online?</div><div class="ch-topics">Медиа, интернет, устройства, частота действий</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Große und kleine Gefühle</div><div class="ch-topics">Чувства, события, выражение эмоций</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Leben in der Stadt</div><div class="ch-topics">Городская жизнь, важные места, описания</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Arbeitswelten</div><div class="ch-topics">Мир работы, профессии, рабочие ситуации</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Ganz schön mobil</div><div class="ch-topics">Транспорт, мобильность, преимущества и недостатки</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Gelernt ist gelernt!</div><div class="ch-topics">Обучение, навыки, опыт, советы</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Sportlich, sportlich</div><div class="ch-topics">Спорт, виды спорта, предпочтения</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Zusammen leben</div><div class="ch-topics">Совместная жизнь, соседи, жильё</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Wie die Zeit vergeht!</div><div class="ch-topics">Время, этапы жизни, сравнение прошлого и настоящего</div></div></a></li>
-        <li class="chapter"><a href="A2/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Gute Unterhaltung!</div><div class="ch-topics">Развлечения, медиа, свободное время</div></div></a></li>
-      </ol>
-    </section>
+const V=(c,n,p,t)=>({c,v:1,l:'WS '+n+' · S. '+p,i:'Lernwortschatz: Notieren Sie Ihre Übersetzung, hören Sie das Wort (🔊) und haken Sie ab, was Sie gelernt haben.',t:t.split(';')});
+const EV=[
+V(10,'Miteinander',124,'die Gemeinschaft, -en;die Gesellschaft, -en;das Zusammenleben (Sg.);der Wert, -e;der Respekt (Sg.);die Meinungsfreiheit (Sg.);die Gleichberechtigung (Sg.);die Würde (Sg.);die Solidarität (Sg.);die Gerechtigkeit (Sg.);die Ehrlichkeit (Sg.);die Fairness (Sg.);die Zivilcourage (Sg.);die Sicherheit (Sg.);die Erziehung (Sg.);das Recht, -e;regeln;die Minderheit, -en;das Vorurteil, -e;die Toleranz (Sg.)'),
+V(10,'Engagement',124,'ehrenamtlich;die Hilfsbereitschaft (Sg.);die Nachhilfe (Sg.);bewältigen;die Mühe, -n;das Vorhaben, -;der Pate, -n;die Patin, -nen;die Patenschaft (Sg.);die Not, ¨e;bedürftig;die Berufsfeuerwehr, -en;die Erste Hilfe (Sg.);spenden;erfüllen;schließen, er schließt, schloss, hat geschlossen;unterzeichnen;national'),
+V(10,'Behörden und Arbeitswelt',124,'das Amt, ¨er;der Anspruch, ¨e;die Vorschrift, -en;ab|melden;zu|lassen, er lässt zu, ließ zu, hat zugelassen;verantwortlich (für + A.);zuverlässig;eine Entscheidung treffen;das Arbeitsamt, ¨er;die Arbeitsstelle, -n;ein|nehmen, er nimmt ein, nahm ein, hat eingenommen;finanzieren;die Dienstleistung, -en'),
+V(10,'Politik',124,'die Demokratie, -n;ab|stimmen;der Bundestag (Sg.);der/die Abgeordnete, -n;die Regierung, -en;der Bundeskanzler, -;die Bundeskanzlerin, -nen;der Minister, -;die Ministerin, -nen;der Kandidat, -en;die Kandidatin, -nen;die Bürgerversammlung, -en;die EU / Europäische Union (Sg.);der Mitgliedsstaat, -en;die Organisation, -en;die Vertretung, -en;der Sitz, -e'),
+V(10,'Migration und Flucht',125,'die Flucht, -en;der Krieg, -e;die Aufnahme (Sg.);die Integration (Sg.);der Migrant, -en;die Migrantin, -nen'),
+V(10,'Lebensmittel',125,'die Apfelsine, -n;die Orange, -n;die Aprikose, -n;die Pflaume, -n;die Zwetschge/Zwetschke, -n;die Konfitüre, -n;die Semmel, -n;das Hörnchen, -;das Croissant, -s;die Margarine, -n;das Milchprodukt, -e;die Vollmilch (Sg.);der Quark (Sg.);die Schlagsahne (Sg.);der Pudding, -e/-s;das Hackfleisch (Sg.);das Hühnchen, -;der/das Ketchup, -s;die Soße, -n;das Gewürz, -e;würzen;die Lieferung, -en'),
+V(10,'Andere Wörter',125,'zunächst;im Lauf (+ G.);übrig;das Ding, -e;verlassen, er verlässt, verließ, hat verlassen;der Vortrag, ¨e;sichern;heraus|finden, er findet heraus, fand heraus, hat herausgefunden;körperlich;blind;der Humor (Sg.);die Auswahl (Sg.);endgültig;entsorgen;erscheinen, er erscheint, erschien, ist erschienen;werden (Passiv);die Zone, -n'),
+V(11,'In der Stadt',136,'der Fußgänger, -;der Stadtbummel, -;das Schaufenster, -;an|schauen;das Bürogebäude, -;das Reinigungsfahrzeug, -e;ab|biegen, er biegt ab, bog ab, ist abgebogen;das Tempo, Tempi;der Schmutz (Sg.);der Dreck (Sg.);der Stadtmensch, -en;der Landmensch, -en;der/die Obdachlose, -n;das Freizeitangebot, -e;der Rand, ¨er;städtisch;das Garagentor, -e;herunter|fahren, er fährt herunter, fuhr herunter, ist heruntergefahren'),
+V(11,'Krankenhaus und Bäckerei',136,'der Dienst, -e;der Nachtdienst, -e;die Schicht, -en;die Frühschicht, -en;die Übergabe, -n;unruhig;schwer;ein|liefern;der/die Verletzte, -n;die Backstube, -n;der Korb, ¨e;laden, er lädt, lud, hat geladen;konzentriert'),
+V(11,'Städte-Ranking',136,'das Ranking, -s;die Fachleute (Pl.);im Vordergrund stehen;der Mittelpunkt, -e;ab|hängen (von + D.), er hängt ab, hing ab, hat abgehangen;berücksichtigen;werten;betreffen, er betrifft, betraf, hat betroffen'),
+V(11,'Lebensqualität einer Stadt',136,'die Work-Life-Balance (Sg.);gesellschaftlich;die Gender-Gerechtigkeit (Sg.);die Diversität (Sg.);das Gesundheitssystem, -e;die Kinderbetreuung (Sg.);die Elternzeit (Sg.);die Intensität, -en;die Arbeitslosigkeit (Sg.);die Hochschule, -n;der Zugang, ¨e;fest|legen;rechtlich'),
+V(11,'Projekte für die Stadt',136,'die Stadträtin, -nen;das Budget, -s;der Wohnbau (Sg.);der Umbau, -ten;die Renovierung, -en;die Initiative, -n;die Kita, -s'),
+V(11,'Eine Diskussion führen',137,'die Diskussion, -en;ein|gehen (auf + A.), er geht ein, ging ein, ist eingegangen;recht geben;außer Acht lassen;vermitteln;unterbrechen, er unterbricht, unterbrach, hat unterbrochen;aus|reden;fort|setzen'),
+V(11,'Eine Stadt kennenlernen',137,'der Tourismus (Sg.);die Rundfahrt, -en;rum|fahren, er fährt rum, fuhr rum, ist rumgefahren;das Wahrzeichen, -;das Denkmal, ¨er;die Fassade, -n;die Gasse, -n;schmal;mittendrin;fern;um … herum;fließen, er fließt, floss, ist geflossen;springen, er springt, sprang, ist gesprungen;steigen, er steigt, stieg, ist gestiegen;rauf|fahren, er fährt rauf, fuhr rauf, ist raufgefahren;rollen;der/die Einheimische, -n;der Dialekt, -e;das Billett, -s (Schweizerdeutsch);das Velo, -s (Schweizerdeutsch)'),
+V(11,'Andere Wörter und Wendungen',137,'sich auf den Weg machen;hinein|gehen, er geht hinein, ging hinein, ist hineingegangen;hindern (an + D.);der Sozialarbeiter, -;der Flüchtling, -e;an|gehen, er geht an, ging an, ist angegangen;irgendein, irgendeine, irgendwelche;anscheinend;eindeutig')
+];
 
-    <!-- B1 -->
-    <section class="course b1" id="b1" aria-labelledby="b1-title">
-      <div class="course-header">
-        <div class="course-badge b1" aria-hidden="true">B1</div>
-        <div class="course-meta">
-          <h2 class="course-title" id="b1-title">B1 · Netzwerk neu</h2>
-          <p class="course-desc">Самостоятельное использование языка: путешествия, техника, изменения в жизни, работа, экология, отношения, здоровье, искусство, общество и деньги.</p>
-          <div class="course-stats">
-            <span class="stat">12 Kapitel</span>
-            <span class="stat">Goethe-Zertifikat B1 / Zertifikat Deutsch</span>
-          </div>
-        </div>
-      </div>
-      <ol class="chapters">
-        <li class="chapter"><a href="B1/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Gute Reise!</div><div class="ch-topics">Путешествия, предпочтения, планирование, рассказы об отпуске</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Das ist ja praktisch!</div><div class="ch-topics">Техника, услуги, рекламации, аргументы за и против</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">Veränderungen</div><div class="ch-topics">Изменения в жизни, прошлое, счастье, поведение</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Arbeitswelt</div><div class="ch-topics">Работа, собеседования, извинения, советы</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Umweltfreundlich?</div><div class="ch-topics">Экология, устойчивое поведение, мнения</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Blick nach vorn</div><div class="ch-topics">Планы на будущее, прогнозы, цели</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Zwischenmenschliches</div><div class="ch-topics">Отношения, конфликты, дружба, семья</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Rund um Körper und Geist</div><div class="ch-topics">Здоровье, тело и дух, самочувствие</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Kunststücke</div><div class="ch-topics">Искусство, творчество, культурные события</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Miteinander</div><div class="ch-topics">Совместная жизнь, ценности, справедливость</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Stadt, Land, Fluss</div><div class="ch-topics">Город и деревня, регионы, описания мест</div></div></a></li>
-        <li class="chapter"><a href="B1/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Geld regiert die Welt?</div><div class="ch-topics">Деньги, банки, потребление, ценности</div></div></a></li>
-      </ol>
-    </section>
+const OLD=E11.map(a=>({c:11,l:a[0],i:a[1],t:a[2],b:a[3],x:a[4]})).filter(e=>!/^(KB 9a|KB 13b|ÜB 13c)/.test(e.l));
+OLD.forEach(e=>{if(e.l.startsWith('ÜB 10b'))e.t[1]=e.t[1].replace('[gesagt hat]','[gesagt hat/vorgeschlagen hat]')});
+const bk=l=>l.startsWith('KB')?0:l.startsWith('ÜB')?1:2;
+const key=e=>{const l=e.l,p=+(l.match(/S\. (\d+)/)||[0,0])[1];let n=0,m=l.match(/^(?:KB|ÜB) (\d+)([a-e])?/);if(m)n=m[1]*10+(m[2]?m[2].charCodeAt(0)-96:0);if(/Wortbildung/.test(l))n=900;if(m=l.match(/ R(\d)/))n=950+ +m[1];return e.c*1e7+bk(l)*1e6+p*1e3+n};
+const ALL=[...OLD,...E10,...E10U,...E11N,...E11U,...EV].sort((a,b)=>key(a)-key(b));
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],M=$('#m');
+let ST={};try{ST=JSON.parse(localStorage.getItem('nw1011')||'{}')}catch(e){}
+['d','a','o','v'].forEach(k=>ST[k]=ST[k]||{});
+const sv=()=>{try{localStorage.setItem('nw1011',JSON.stringify(ST))}catch(e){}};
+const nz=s=>s.toLowerCase().replace(/ß/g,'ss').replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/[.,!?…„“"]/g,'').replace(/\s+/g,' ').trim();
+const alts=a=>a.replace(/\/innen/g,'\u0001innen').split('/').map(x=>x.replace(/\u0001/g,'/'));
+const fm=s=>s.replace(/<<([+-])>>([^<{\[]*)/g,(_,y,t)=>'<label class="cb"><input type="checkbox" data-c="'+(y=='+'?1:0)+'">'+t+'</label>').replace(/\{([^}]*)\}/g,(_,o)=>'<select><option value="">…</option>'+o.split('|').map(x=>x[0]=='*'?'<option data-c="1">'+x.slice(1)+'</option>':'<option>'+x+'</option>').join('')+'</select>').replace(/\[([^\]]*)\]/g,(_,a)=>'<input type="text" data-a="'+a.replace(/"/g,'&quot;')+'" size="'+Math.min(58,Math.max(6,alts(a)[0].length))+'" autocomplete="off" autocapitalize="off" spellcheck="false">');
+const SY='speechSynthesis' in window;
+function say(t){if(!SY)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='de-DE';u.rate=+$('#rate').value;speechSynthesis.speak(u)}
+const spk=w=>/^(der|die|das)\s/.test(w)?w.split(',')[0]:w.replace(/\|/g,'').replace(/\([^)]*\)/g,'');
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):s,low=s=>s?s[0].toLowerCase()+s.slice(1):s;
+function pparse(it,mode){const w=[],x=[];it.split(/\s+/).forEach(t=>{if(t=='|'){x[x.length-1]='|';return}let m=t.match(mode=='cp'?/[,.]$/:/,$/);if(mode=='p'){w.push(t);x.push('')}else{w.push(m?t.slice(0,-1):t);x.push(m?m[0]:'')}});return{w,x}}
+const NM=e=>e.l;
+ALL.forEach((e,n)=>{e.id=e.l;const d=document.createElement('section');d.className='ex';d.dataset.c=e.c;d.dataset.b=['KB','ÜB','WS'][bk(e.l)];d.id='e'+n;
+let h='<h2><span>'+e.l+'</span></h2><p class="i">'+e.i+'</p>'+(e.b?'<p class="bank">'+e.b+'</p>':'');
+if(e.x&&SY)h+='<div class="tts" role="group" aria-label="Hörtexte">'+e.x.map((t,i)=>'<button class="b" data-t="'+i+'">🔊 Text '+(i+1)+'</button>').join('')+'<button class="b" data-t="x" aria-label="Stopp">■</button></div>';
+let P=null;
+if(e.v)h+=e.t.map((w,i)=>'<div class="vr"><span class="w">'+w+'</span>'+(SY?'<button class="ib" data-s="'+i+'" aria-label="Wort anhören">🔊</button>':'')+'<input type="text" class="tr" data-i="'+i+'" placeholder="Meine Übersetzung" aria-label="Übersetzung">'+'<label class="cb"><input type="checkbox" class="lk" data-i="'+i+'">gelernt</label></div>').join('');
+else if(e.o)h+=e.t.map((p,i)=>'<label style="display:block;margin:6px 0">'+p+'<textarea rows="2" data-i="'+i+'" placeholder="Meine Antwort"></textarea></label>').join('');
+else if(e.pm){P=e.t.map(t=>pparse(t,e.pm));h+='<div class="pw">'+P.map((p,j)=>'<p data-j="'+j+'" style="line-height:2">'+p.w.map((w,i)=>'<button class="tk" data-i="'+i+'">'+w+'</button><span class="pz"></span>').join(' ')+'</p>').join('')+'</div>'}
+else h+='<ol>'+e.t.map(i=>'<li>'+fm(i)+'</li>').join('')+'</ol>';
+h+='<div class="act">'+(e.o||e.v?'':'<button class="b p ck">Prüfen</button><button class="b hn">💡 Tipp</button><button class="b sl">Lösung</button><button class="b rs">Neu</button>')+(e.o?'<button class="b p dn">Erledigt ✓</button>':'')+(e.m?'<button class="b ml">Musterlösung</button>':'')+'<span class="sc" role="status" aria-live="polite"></span></div>';
+if(e.m)h+='<details class="md"><summary>Musterlösung</summary><p>'+e.m+'</p></details>';
+if(e.x)h+='<details><summary>Transkript</summary>'+e.x.map((t,i)=>'<p><b>'+(i+1)+'.</b> '+t+'</p>').join('')+'</details>';
+d.innerHTML=h;
+const cs=()=>$$c(d,'select,input[type=text],input[type=checkbox]:not(.lk)');
+cs().forEach((c,i)=>{if(!c.closest('label'))c.setAttribute('aria-label','Antwort '+(i+1))});
+const mk=c=>c.tagName=='SELECT'?!!c.selectedOptions[0].dataset.c:c.type=='checkbox'?c.checked==(c.dataset.c=='1'):alts(c.dataset.a).some(a=>nz(a)==nz(c.value));
+const mark=(c,r)=>{c.classList.toggle('ok',r);c.classList.toggle('bad',!r);let s=c.nextElementSibling;if(c.parentNode.classList&&c.parentNode.classList.contains('cb'))s=c.parentNode.nextElementSibling;if(!s||!s.classList.contains('mk')){s=document.createElement('span');s.className='mk';(c.parentNode.classList.contains('cb')?c.parentNode:c).after(s)}s.className='mk '+(r?'ok':'bad');s.textContent=r?'✓':'✗';s.setAttribute('aria-label',r?'richtig':'falsch')};
+const clr=()=>{$$c(d,'.mk').forEach(x=>x.remove());$$c(d,'.ok,.bad').forEach(x=>x.classList.remove('ok','bad'))};
+const fin=ok=>{ST.d[e.id]=ok?1:0;d.classList.toggle('done',!!ok);sv();prog()};
+const snap=()=>{if(e.o||e.v)return;ST.a[e.id]=P?P.map((p,j)=>p.m||[]):cs().map(c=>c.tagName=='SELECT'?c.selectedIndex:c.type=='checkbox'?+c.checked:c.value);sv()};
+const pdraw=()=>$$c(d,'.pw p').forEach((pe,j)=>{const p=P[j];p.m=p.m||[];pe.querySelectorAll('.tk').forEach((b,i)=>{let w=p.w[i];if(e.pm=='cp'&&i>0){w=low(w);if(p.m[i-1]=='.')w=cap(w)}b.textContent=w;b.nextElementSibling.textContent=p.m[i]||''})});
+if(P){const sa=ST.a[e.id];if(sa)P.forEach((p,j)=>p.m=sa[j]);pdraw()}
+else if(!e.o&&!e.v){const sa=ST.a[e.id];if(sa)cs().forEach((c,i)=>{if(sa[i]==null)return;if(c.tagName=='SELECT')c.selectedIndex=sa[i];else if(c.type=='checkbox')c.checked=!!sa[i];else c.value=sa[i]})}
+if(e.o)$$c(d,'textarea').forEach(t=>t.value=(ST.o[e.id]||[])[t.dataset.i]||'');
+if(e.v){const v=ST.v[e.id]||{};$$c(d,'.tr').forEach(t=>t.value=(v[t.dataset.i]||{}).t||'');$$c(d,'.lk').forEach(t=>t.checked=!!(v[t.dataset.i]||{}).k)}
+if(ST.d[e.id])d.classList.add('done');
+const chk=()=>{let ok=0,t=0;if(P){P.forEach(p=>{p.m=p.m||[];const bad=[];p.w.forEach((w,i)=>{const ex=p.x[i]||'',u=p.m[i]||'';if(ex)t++;if(ex&&ex==u)ok++;else if(!ex&&u)ok--;if(ex!=u)bad.push(i)});$$c(d,'.tk').forEach(b=>b.classList.remove('bad'));});
+$$c(d,'.pw p').forEach((pe,j)=>pe.querySelectorAll('.tk').forEach((b,i)=>{const p=P[j];b.classList.toggle('bad',(p.x[i]||'')!=(p.m[i]||''))}));ok=Math.max(0,ok);var all=P.every(p=>p.w.every((w,i)=>(p.x[i]||'')==((p.m||[])[i]||'')))}
+else{clr();const c=cs();t=c.length;c.forEach(x=>{const r=mk(x);ok+=r;mark(x,r)});var all=ok==t}
+$('#e'+n+' .sc').textContent=(all?'✓ Alles richtig! ':'')+ok+' / '+t;fin(all)};
+d.addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;
+if(b.dataset.t!=null){if(b.dataset.t=='x'){speechSynthesis.cancel()}else say(e.x[+b.dataset.t])}
+else if(b.dataset.s!=null)say(spk(e.t[+b.dataset.s]));
+else if(b.classList.contains('tk')){const p=P[+b.parentNode.dataset.j];p.m=p.m||[];const i=+b.dataset.i,c=p.m[i]||'';const cyc=e.pm=='p'?['','|']:e.pm=='c'?['',',']:['',',','.'];p.m[i]=cyc[(cyc.indexOf(c)+1)%cyc.length];if(!p.m[i])p.m[i]='';pdraw();$$c(d,'.tk').forEach(x=>x.classList.remove('bad'));snap()}
+else if(b.classList.contains('ck'))chk();
+else if(b.classList.contains('hn')){$$c(d,'input[type=text]').forEach(c=>{if(!c.value)c.placeholder=alts(c.dataset.a)[0].slice(0,2)+'…'});if(!$$c(d,'input[type=text]').length)$('#e'+n+' .sc').textContent='Tipp: Lesen Sie die Frage noch einmal und prüfen Sie Schritt für Schritt.'}
+else if(b.classList.contains('sl')){if(P){P.forEach(p=>p.m=p.x.map(x=>x||''));pdraw()}else{cs().forEach(c=>{if(c.tagName=='SELECT')c.selectedIndex=Math.max(0,[...c.options].findIndex(o=>o.dataset.c));else if(c.type=='checkbox')c.checked=c.dataset.c=='1';else c.value=alts(c.dataset.a)[0]})}snap();chk()}
+else if(b.classList.contains('rs')){if(P){P.forEach(p=>p.m=[]);pdraw();$$c(d,'.tk').forEach(x=>x.classList.remove('bad'))}else{clr();cs().forEach(c=>{if(c.tagName=='SELECT')c.selectedIndex=0;else if(c.type=='checkbox')c.checked=false;else{c.value='';c.placeholder=''}})}$('#e'+n+' .sc').textContent='';snap();fin(0)}
+else if(b.classList.contains('ml')){const x=d.querySelector('.md');x.open=!x.open}
+else if(b.classList.contains('dn'))fin(!ST.d[e.id]);});
+d.addEventListener('input',ev=>{const t=ev.target;if(t.tagName=='TEXTAREA'){const a=ST.o[e.id]=ST.o[e.id]||[];a[t.dataset.i]=t.value;sv()}else if(t.classList.contains('tr')||t.classList.contains('lk')){const v=ST.v[e.id]=ST.v[e.id]||{},r=v[t.dataset.i]=v[t.dataset.i]||{};if(t.type=='checkbox')r.k=+t.checked;else r.t=t.value;sv();fin(e.t.every((w,i)=>(v[i]||{}).k))}else{snap();if(t.classList.contains('ok')||t.classList.contains('bad'))t.classList.remove('ok','bad')}});
+d.addEventListener('keydown',ev=>{if(ev.key=='Enter'&&ev.target.type=='text'&&!ev.target.classList.contains('tr')){ev.preventDefault();const c=cs(),i=c.indexOf(ev.target);(c[i+1]&&c[i+1].type=='text'?c[i+1]:d.querySelector('.ck')).focus()}});
+M.appendChild(d)});
+function $$c(r,s){return[...r.querySelectorAll(s)]}
+let FL={c:'',b:'',o:0};
+function prog(){const t={10:[0,0],11:[0,0]};ALL.forEach(e=>{t[e.c][1]++;if(ST.d[e.id])t[e.c][0]++});const a=t[10][0]+t[11][0],z=ALL.length;$('#pt').textContent=a+' / '+z+' Aufgaben gelöst · Kapitel 10: '+t[10][0]+'/'+t[10][1]+' · Kapitel 11: '+t[11][0]+'/'+t[11][1];$('#pb').style.width=100*a/z+'%';$('.bar').setAttribute('aria-valuenow',Math.round(100*a/z));filt()}
+function filt(){let last=0;$$('h3.ch').forEach(h=>h.remove());const sec=[];ALL.forEach((e,n)=>{const d=$('#e'+n),show=(!FL.c||FL.c==e.c)&&(!FL.b||FL.b==d.dataset.b)&&(!FL.o||!ST.d[e.id]);d.hidden=!show;if(show&&last!=e.c){last=e.c;const h=document.createElement('h3');h.className='ch';h.textContent=e.c==10?'Kapitel 10 · Miteinander':'Kapitel 11 · Stadt, Land, Fluss';d.before(h)}})}
+$$('.chip[data-g]').forEach(b=>b.onclick=()=>{FL[b.dataset.g]=b.dataset.v;$$('.chip[data-g="'+b.dataset.g+'"]').forEach(x=>x.setAttribute('aria-pressed',x==b));filt()});
+$('#op').onclick=e=>{FL.o=!FL.o;e.target.setAttribute('aria-pressed',FL.o);filt()};
+$('#rs').onclick=()=>{if(confirm('Alle Antworten und den Fortschritt löschen?')){ST={d:{},a:{},o:{},v:{}};try{localStorage.removeItem('nw1011')}catch(e){}location.reload()}};
+$('#th').onclick=()=>{const r=document.documentElement,c=r.dataset.theme,n=c=='dark'?'light':c=='light'?'':'dark';n?r.dataset.theme=n:delete r.dataset.theme;try{localStorage.setItem('nw1011t',n)}catch(e){}};
+try{const t=localStorage.getItem('nw1011t');if(t)document.documentElement.dataset.theme=t}catch(e){}
+prog();
 
-    <!-- B2 -->
-    <section class="course b2" id="b2" aria-labelledby="b2-title">
-      <div class="course-header">
-        <div class="course-badge b2" aria-hidden="true">B2</div>
-        <div class="course-meta">
-          <h2 class="course-title" id="b2-title">B2 · Netzwerk neu</h2>
-          <p class="course-desc">Уверенное владение языком: общество, работа и карьера, медиа и информация, культура, наука, глобальные темы и аргументация.</p>
-          <div class="course-stats">
-            <span class="stat">12 Kapitel</span>
-            <span class="stat">Goethe-Zertifikat B2</span>
-          </div>
-        </div>
-      </div>
-      <ol class="chapters">
-        <li class="chapter"><a href="B2/kapitel1.html"><span class="ch-num">01</span><div class="ch-body"><div class="ch-title">Gesellschaft im Wandel</div><div class="ch-topics">Общественные изменения, поколения, ценности</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel2.html"><span class="ch-num">02</span><div class="ch-body"><div class="ch-title">Arbeit und Karriere</div><div class="ch-topics">Карьера, рынок труда, профессиональное развитие</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel3.html"><span class="ch-num">03</span><div class="ch-body"><div class="ch-title">Medien und Information</div><div class="ch-topics">СМИ, фейковые новости, критическое мышление</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel4.html"><span class="ch-num">04</span><div class="ch-body"><div class="ch-title">Bildung und Lernen</div><div class="ch-topics">Образование, lifelong learning, методы обучения</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel5.html"><span class="ch-num">05</span><div class="ch-body"><div class="ch-title">Umwelt und Klima</div><div class="ch-topics">Климат, устойчивое развитие, экологические проекты</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel6.html"><span class="ch-num">06</span><div class="ch-body"><div class="ch-title">Kultur und Identität</div><div class="ch-topics">Культурная идентичность, традиции, многообразие</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel7.html"><span class="ch-num">07</span><div class="ch-body"><div class="ch-title">Wissenschaft und Technik</div><div class="ch-topics">Наука, инновации, этика технологий</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel8.html"><span class="ch-num">08</span><div class="ch-body"><div class="ch-title">Gesundheit und Lebensstil</div><div class="ch-topics">Здоровый образ жизни, медицина, профилактика</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel9.html"><span class="ch-num">09</span><div class="ch-body"><div class="ch-title">Wirtschaft und Konsum</div><div class="ch-topics">Экономика, потребление, устойчивый бизнес</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel10.html"><span class="ch-num">10</span><div class="ch-body"><div class="ch-title">Politik und Gesellschaft</div><div class="ch-topics">Политика, гражданское общество, участие</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel11.html"><span class="ch-num">11</span><div class="ch-body"><div class="ch-title">Mobilität und Globalisierung</div><div class="ch-topics">Глобализация, миграция, мобильность</div></div></a></li>
-        <li class="chapter"><a href="B2/kapitel12.html"><span class="ch-num">12</span><div class="ch-body"><div class="ch-title">Zukunft gestalten</div><div class="ch-topics">Будущее, инновации, личная ответственность</div></div></a></li>
-      </ol>
-    </section>
-  </main>
-
-  <footer>
-    <p>Netzwerk neu · Übungen · A1–B2 · Локальные страницы капитулов</p>
-  </footer>
-</body>
-</html>
+</script></body></html>
